@@ -17,6 +17,7 @@
   <body>
 
     <div class="container">
+    <h3 class="text-center"><a href="${contextPath}/home">Home</a></h3>
       <form method="POST" action="${contextPath}/login" modelAttribute="user" class="form-signin">
         <h2 class="form-heading">Log in</h2>
 

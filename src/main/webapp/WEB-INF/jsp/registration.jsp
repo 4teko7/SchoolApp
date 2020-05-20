@@ -16,7 +16,7 @@
   <body>
 
     <div class="container">
-
+		<h3 class="text-center"><a href="${contextPath}/home">Home</a></h3>
         <form:form method="POST" modelAttribute="user" action="/registration" class="form-signin">
             <h2 class="form-signin-heading">Create your account</h2>
             <spring:bind path="username">

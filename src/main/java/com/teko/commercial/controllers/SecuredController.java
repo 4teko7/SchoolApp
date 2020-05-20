@@ -44,7 +44,7 @@ public class SecuredController {
 		theModel.addAttribute("users",users);
 		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
 		
-		return "users2";
+		return "users";
 
 	}
 	
