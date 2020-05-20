@@ -125,26 +125,13 @@ h2 a {
 -->
 </style>
 
-<table class = "container">
-<c:if test="${message != null}">
-    </div><div style = "" class="alert alert-success">
-	<span style = "display:flex; justify-content:center;">${message}</span>
-	</div>
-	<br>  
-</c:if>
-
-</table>
-
 <table class="container" >
 
 <div style = "display: flex; justify-content: center;">
-
 <button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/secured/users' ">Users</button>
 <button style = "margin-left:3rem; color:green"  class = "btn btn-info" onclick="window.location.href = '${pageContext.request.contextPath}/secured/adduser'">Add User</button>
 <button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/login' ">Login</button>
 <button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/logout' ">Logout</button></div>
-
-
 <!-- 	<thead>
 	
 		<tr>

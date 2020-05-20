@@ -11,7 +11,21 @@
 
       <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
       <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
+	
+	<style type="text/css">
+      
+      body {
+		  font-family: 'Open Sans', sans-serif;
+		  font-weight: 300;
+		  line-height: 1.42em;
+		  color:#A7A1AE;
+		  background-color:#1F2739;
+		}
+      </style>
+
   </head>
+
+
 
   <body>
 
@@ -42,7 +56,7 @@
                 </div>
             </spring:bind>
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
             <h4 class="text-center"><a href="${contextPath}/login">Login</a></h4>
         </form:form>
 

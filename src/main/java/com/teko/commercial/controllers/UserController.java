@@ -46,7 +46,6 @@ public class UserController {
 	@PostMapping("/registration")
 	public String registerUser(@ModelAttribute("user") User user, BindingResult bindingResult) {
 		validator.validate(user, bindingResult);
-		System.out.println("bindingResult : " + bindingResult);
 		if (bindingResult.hasErrors()) {
             return "registration";
         }
@@ -64,7 +63,7 @@ public class UserController {
             theModel.addAttribute("message", "You have been logged out successfully.");
         
         if(authentication != null && authentication.isAuthenticated()) {
-        	theModel.addAttribute("message","You Logged In Successfully.");
+//        	theModel.addAttribute("message","You Logged In Successfully.");
         	return "home";
         }
 //		theModel.addAttribute("user",new User());
