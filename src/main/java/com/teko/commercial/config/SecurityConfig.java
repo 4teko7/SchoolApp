@@ -17,10 +17,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.teko.commercial.repositories.UserRepository;
 
-@EnableGlobalMethodSecurity(prePostEnabled = true)  // For Pre Role Control
+//@EnableGlobalMethodSecurity(prePostEnabled = true)  // For Pre Role Control
 @EnableWebSecurity
 @Configuration
 @EnableJpaRepositories(basePackageClasses = {UserRepository.class})
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
@@ -48,14 +49,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.csrf().disable();
 		http.authorizeRequests()
-			.antMatchers("**/secured/**").authenticated()
+			.antMatchers("/").permitAll()
+			.antMatchers("/login").permitAll()
+			.antMatchers("/register").permitAll()
+			.antMatchers("/secured/**").authenticated() //hasAnyAuthority("ADMIN","VIP","USER")
 			.anyRequest().permitAll()
-			.and().formLogin().loginPage("/users/login").permitAll()
+			.and().csrf().disable().formLogin().loginPage("/login")
+			.failureUrl("/login?error=true")
+			.defaultSuccessUrl("/home")
+			.usernameParameter("username")
+			.passwordParameter("password")
 			.and().logout()
 						.invalidateHttpSession(true)
 						.clearAuthentication(true)
-						.logoutRequestMatcher(new AntPathRequestMatcher("/users/logout"))
-						.logoutSuccessUrl("/users/login?logout")
+						.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+						.logoutSuccessUrl("/login?logout")
 					.permitAll();
 		//.loginPage("/users/login") you can use this page as a login page
 	}

@@ -36,10 +36,10 @@
 			       </theader>  
 		<c:forEach items="${users}" var="user">
 		
-				<c:url var = "deleteLink" value="/users/deleteuser">
+				<c:url var = "deleteLink" value="/secured/deleteuser">
 					<c:param name="id" value="${user.id}" />
 				</c:url>
-				<c:url var = "updateLink" value="/users/updateuser">
+				<c:url var = "updateLink" value="/secured/updateuser">
 					<c:param name="id" value="${user.id}" />
 				</c:url>
 			
@@ -71,8 +71,8 @@
 	<br>
 				<div style="clear; both;"></div> 
 				
-				<a href="${pageContext.request.contextPath}/users/registration">Registration</a>
-				<a href="${pageContext.request.contextPath}/users/login">Login</a>
+				<a href="${pageContext.request.contextPath}/registration">Registration</a>
+				<a href="${pageContext.request.contextPath}/login">Login</a>
 				<%-- <a href="${pageContext.request.contextPath}/todos/todos">Todos</a> --%>
 		
 </body>

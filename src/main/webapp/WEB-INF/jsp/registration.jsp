@@ -17,7 +17,7 @@
 
     <div class="container">
 
-        <form:form method="POST" modelAttribute="user" action="/users/registration" class="form-signin">
+        <form:form method="POST" modelAttribute="user" action="/registration" class="form-signin">
             <h2 class="form-signin-heading">Create your account</h2>
             <spring:bind path="username">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
@@ -43,7 +43,7 @@
             </spring:bind>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-            <h4 class="text-center"><a href="${contextPath}/users/login">Login</a></h4>
+            <h4 class="text-center"><a href="${contextPath}/login">Login</a></h4>
         </form:form>
 
     </div>

@@ -23,7 +23,7 @@ import com.teko.commercial.validator.UserValidator;
 //import com.teko7.userService.DatabaseuserService;
 //import com.teko7.validator.validator;
 
-@RequestMapping("/users")
+@RequestMapping("/")
 @Controller
 public class UserController {
 
@@ -33,12 +33,7 @@ public class UserController {
 	@Autowired
 	private UserValidator validator;
 	
-	@GetMapping("/users")
-	public String getAllUsers(Model theModel) {
-		List<User> users = userService.findAll();
-		theModel.addAttribute("users",users);
-		return "users";
-	}
+	
 	
 	@GetMapping("/registration")
 	public String registerUser(Model theModel) {
@@ -46,7 +41,7 @@ public class UserController {
 		return "registration";
 	}
 	
-	@PostMapping("registration")
+	@PostMapping("/registration")
 	public String registerUser(@ModelAttribute("user") User user, BindingResult bindingResult) {
 		validator.validate(user, bindingResult);
 		System.out.println("bindingResult : " + bindingResult);
@@ -55,7 +50,7 @@ public class UserController {
         }
 		userService.save(user);
 		
-		return "redirect:/users/users";
+		return "redirect:/home";
 	}
 	
 	@GetMapping("/login")
@@ -71,37 +66,10 @@ public class UserController {
 	
 	@PostMapping("/login")
 	public String loginUser(@ModelAttribute("user") User user) {
-//		userService.save(user);
-//		System.out.println("USER : " + user);
-		return "redirect:/users/users";
+		return "redirect:/home";
 	}
 	
-	@RequestMapping(value="adduser", method = RequestMethod.GET)
-	public String showFormForAddUser(Model theModel) {
-		
-		User user = new User();
-		theModel.addAttribute("user",user);
-		return "addUserForm";
-	}
 	
-	@RequestMapping(value="adduser", method = RequestMethod.POST)
-	public String addTodo(@ModelAttribute("user") User user) {
-		userService.save(user);
-		return "redirect:/users/users";
-	}
-	
-	@RequestMapping(value="deleteuser", method = RequestMethod.GET)
-	public String deleteUser(@RequestParam("id") int theId) {
-		userService.deleteUser(theId);
-		return "redirect:/users/users";
-	}
-	
-	@RequestMapping(value="updateuser", method = RequestMethod.GET)
-	public String updateUser(@RequestParam("id") int theId,Model theModel) {
-		User user = userService.findById(theId);
-		theModel.addAttribute("user",user);
-		return "addUserForm";
-	}
 	
 	
 	

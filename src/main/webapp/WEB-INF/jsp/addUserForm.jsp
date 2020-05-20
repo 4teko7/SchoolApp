@@ -28,7 +28,7 @@
 		<div id="container" style = " align-items: center;">
 			<h3>Save User</h3>
 		
-			<form:form action="adduser" modelAttribute="user" method="POST">
+			<form:form action="/secured/adduser" modelAttribute="user" method="POST">
 	  			<form:hidden path="id" />
 		        <table >    
 			         <tr>    
@@ -61,7 +61,7 @@
 	       
 			<div style="clear; both;"></div>
 			<p>
-				<a href="${pageContext.request.contextPath}/users/users/">Go Users</a>
+				<a href="${pageContext.request.contextPath}/users/">Go Users</a>
 			</p>
 		</div>
 

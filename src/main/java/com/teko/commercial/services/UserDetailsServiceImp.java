@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.teko.commercial.Entities.Role;
@@ -23,11 +24,15 @@ public class UserDetailsServiceImp implements UserDetailsService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	
+	private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) {return new UserDetailsImp(userRepository.findByUsername(username));}
 	
 	public void save(User entity) {
 		entity.setActive(1);
+		entity.setPassword(passwordEncoder.encode(entity.getPassword()));
 		Set<Role> role = new HashSet<Role>();
 		role.add(new Role("USER"));
 		entity.setRoles(role);
