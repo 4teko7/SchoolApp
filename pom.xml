@@ -15,7 +15,7 @@
 	<description>Commercial Springboot Application</description>
 
 	<properties>
-		<java.version>14</java.version>
+		<java.version>13</java.version>
 	</properties>
 
 	<dependencies>
@@ -61,9 +61,26 @@
 		    	<optional>true</optional>
 			</dependency>
 		<!-- END OF AUTO REFRESH -->
-
-			
-			
+		
+		<!-- Need this to compile JSP -->
+		<dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-tomcat</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.tomcat.embed</groupId>
+		    <artifactId>tomcat-embed-jasper</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+		<!-- END OF Need this to compile JSP -->
+		
+		
 	</dependencies>
 
 	<build>

@@ -1,5 +1,6 @@
 package com.teko.commercial.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,17 @@ public class UserDetailsServiceImp implements UserDetailsService {
 	private UserRepository userRepository;
 	
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<User> optionalUser = userRepository.findByUsername(username);
-		optionalUser.orElseThrow(() -> new UsernameNotFoundException("Username Not Found !"));
-		UserDetailsImp userDetails = optionalUser.map(user -> new UserDetailsImp(user)).get();
-		
-		return new UserDetailsImp(userDetails);
-	}
+	public UserDetails loadUserByUsername(String username) {return new UserDetailsImp(userRepository.findByUsername(username));}
+	
+	public void save(User entity) {userRepository.save(entity);}
+	
+	public List<User> findAll() {return userRepository.findAll();}
+	
+	public User findById(int id) {return userRepository.findById(id);}
+	
+	public User findByUsername(String username) {return userRepository.findByUsername(username);}
+	
+	public void deleteUser(int id) {userRepository.deleteById(id);}
+	
 
 }

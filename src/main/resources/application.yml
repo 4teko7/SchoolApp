@@ -9,7 +9,13 @@ spring:
 #        validation-query: 
     jpa:
         show-sql: true
-        hibernate.ddl-auto: create
+        hibernate.ddl-auto: update
 #        hibernate.naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy 
 #        properties.hibernate.dialect: org.hibernate.dialect.MYSQL5Dialect
+     
+spring.mvc.view.prefix: /WEB-INF/jsp/
+spring.mvc.view.suffix: .jsp
+server.port: 8081
+
+spring.messages.basename: validation
      

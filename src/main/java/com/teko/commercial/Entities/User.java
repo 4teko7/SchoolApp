@@ -38,6 +38,11 @@ public class User {
 	@Column(name = "password")
 	private String password;
 	
+	@Column(name = "passwordConfirm")
+	private String passwordConfirm;
+	
+	
+
 	public String getPassword() {
 		return password;
 	}
@@ -124,7 +129,13 @@ public class User {
 		this.username = username;
 	}
 	
-	
+	public String getPasswordConfirm() {
+		return passwordConfirm;
+	}
+
+	public void setPasswordConfirm(String passwordConfirm) {
+		this.passwordConfirm = passwordConfirm;
+	}
 	
 	
 	

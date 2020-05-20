@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/welcome")
 public class WelcomeController {
 
+	
 	@GetMapping("/all")
 	public String hello() {
 		return "Hello From All";
@@ -20,10 +21,18 @@ public class WelcomeController {
 		return "Secured Hello";
 	}
 	
-//	@PreAuthorize("hasAnyRole('USER')")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/secured/allpeople")
 	public String securedHelloForPeople() {
 		return "Secured Hello FOR PEOPLE";
 	}
+	
+	@GetMapping("/hello")
+	public String giveHello() {
+		return "Hello";
+	}
+	
+	
+	
 	
 }
