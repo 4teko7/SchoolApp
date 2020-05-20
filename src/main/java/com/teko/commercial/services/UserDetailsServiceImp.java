@@ -33,6 +33,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
 	public void save(User entity) {
 		entity.setActive(1);
 		entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+		entity.setPasswordConfirm(passwordEncoder.encode(entity.getPasswordConfirm()));
 		Set<Role> role = new HashSet<Role>();
 		role.add(new Role("USER"));
 		entity.setRoles(role);

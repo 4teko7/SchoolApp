@@ -1,36 +1,57 @@
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%> --%>
-    
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<!--     Bootstrap CSS
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
- -->
-	
-	<title>Add User</title>	  
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+	<title>Add User</title>	
+	<link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+      <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
+  </head>  
 </head>
+
+
 <body>
-	<div id = "container" style = "margin:auto;">
-		<div id="wrapper">
-			<div id="header">
-				<h2>Add User Form</h2>
-			</div>
-		</div>
 	
-		
-		<div id="container" style = " align-items: center;">
-			<h3>Save User</h3>
-		
-			<form:form action="/secured/adduser" modelAttribute="user" method="POST">
+	
+	
+	
+
+<%--         <div class="form-group ${error != null ? 'has-error' : ''}">
+            <span>${message}</span>
+            <input name="username" type="text" class="form-control" placeholder="Username"
+                   autofocus="true"/>
+            <input name="password" type="password" class="form-control" placeholder="Password"/>
+            <span>${error}</span>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+            <h4 class="text-center"><a href="${contextPath}/registration">Create an account</a></h4>
+        </div>
+      </form>
+    </div> --%>
+    
+    <div class="container">
+			<form:form action="/secured/adduser" modelAttribute="user" method="POST"  class="form-signin">
+			<h2 class="form-heading">Save User</h2>
 	  			<form:hidden path="id" />
-		        <table >    
+	  			
+	  			
+	  			<form:input name="name" path = "name" type="text" class="form-control" placeholder="Name"
+                   autofocus="true"/>
+                 <form:input name="email" path = "email" type="text" class="form-control" placeholder="Email"/>
+                  <form:input name="password" path = "password" type="password" class="form-control" placeholder="Password"/>
+                  <form:input name="passwordConfirm" path = "passwordConfirm" type="password" class="form-control" placeholder="Password Confirm"/> 
+                  <form:input name="username" path = "username" type="text" class="form-control" placeholder="Username"/> 
+                   <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+            		<h4 class="text-center"><a href="${pageContext.request.contextPath}/secured/users/">Go Users</a></h4>
+            
+            
+<%-- 		        <table >    
 			         <tr>    
 			          <td>Name : </td>   
 			          <td><form:input path="name"  /></td>  
@@ -56,24 +77,26 @@
 			         <tr>    
 			          <td colspan="2"><input type="submit" value="Save" /></td>    
 			         </tr>    
-		        </table>    
+		        </table>   --%>  
 	       </form:form> 
 	       
 			<div style="clear; both;"></div>
-			<p>
-				<a href="${pageContext.request.contextPath}/users/">Go Users</a>
-			</p>
+			
 		</div>
 
 		  
 	</div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+    
 </body>
 
 
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
- -->
+  <body>
 
+    
+
+    
+  </body>
 </html>

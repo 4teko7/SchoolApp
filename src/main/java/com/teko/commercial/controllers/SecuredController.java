@@ -50,7 +50,7 @@ public class SecuredController {
 //	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="adduser", method = RequestMethod.GET)
 	public String showFormForAddUser(Model theModel) {
-		
+		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
 		User user = new User();
 		theModel.addAttribute("user",user);
 		return "addUserForm";
@@ -59,6 +59,7 @@ public class SecuredController {
 //	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="adduser", method = RequestMethod.POST)
 	public String addTodo(@ModelAttribute("user") User user) {
+		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
 		userService.save(user);
 		return "redirect:/secured/users";
 	}
@@ -66,6 +67,7 @@ public class SecuredController {
 //	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="deleteuser", method = RequestMethod.GET)
 	public String deleteUser(@RequestParam("id") int theId) {
+		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
 		userService.deleteUser(theId);
 		return "redirect:/secured/users";
 	}
@@ -73,6 +75,7 @@ public class SecuredController {
 //	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="updateuser", method = RequestMethod.GET)
 	public String updateUser(@RequestParam("id") int theId,Model theModel) {
+		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
 		User user = userService.findById(theId);
 		theModel.addAttribute("user",user);
 		return "addUserForm";
