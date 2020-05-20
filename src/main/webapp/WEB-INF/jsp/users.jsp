@@ -33,10 +33,31 @@
 					<c:param name="id" value="${user.id}" />
 				</c:url>
 			
-			    ${user}
-			    
-			<a href="${updateLink}" >Update</a>
-			    <a href="${deleteLink}" onclick="if (! (confirm ('Are You Sure ?'))) return false">Delete</a><br>
+			    <table>
+				    <theader>
+							    <tr>   
+						    		  <th>Active</th> 
+							          <th>ID</th>   
+							          <th>Name</th> 
+							          <th>Email</th>
+							          <th>Username</th>
+							          <th>Password</th>
+						       </tr>    
+			       </theader>  
+					<tbody>        
+				    	<tr>    
+				    		<td>${user.active}</td>
+				             <td>${user.id}</td>  
+				         	 <td>${user.name}</td>  
+				         	 <td>${user.email}</td>  
+				         	 <td>${user.username}</td>  
+				         	 <td>${user.password}</td>
+				         	 <td><a href="${updateLink}" >Update</a></td>
+			    			 <td><a href="${deleteLink}" onclick="if (! (confirm ('Are You Sure ?'))) return false">Delete</a></td>
+				         </tr>  
+				   </tbody>
+			  </table> 
+			
 
 			</c:forEach>
 			

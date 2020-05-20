@@ -32,36 +32,27 @@
 	  			<form:hidden path="id" />
 		        <table >    
 			         <tr>    
-			          <td>Firstname : </td>   
-			          <td><form:input path="firstname"  /></td>  
+			          <td>Name : </td>   
+			          <td><form:input path="name"  /></td>  
 			         </tr>    
 			         <tr>    
-			          <td>Lastname :</td>    
-			          <td><form:input path="lastname" /></td>  
+			          <td>Email :</td>    
+			          <td><form:input path="email" /></td>  
 			         </tr>  
 			         
 			         <tr>    
 			          <td>Password :</td>    
 			          <td><form:input path="password" /></td>  
+			         </tr>
+			         <tr>    
+			          <td>Password :</td>    
+			          <td><form:input path="passwordConfirm" /></td>  
 			         </tr> 
 			         
 			         <tr>    
 			          <td>Username :</td>    
 			          <td><form:input path="username" required="required"/></td>  
-			         </tr>  
-			         <tr>    
-			          <td>Age :</td>    
-			          <td><form:input path="age" /></td>  
-			         </tr>  
-			         <tr>    
-			          <td>School :</td>    
-			          <td><form:input path="school" /></td>  
-			         </tr>  
-			         <tr>    
-			          <td>Department :</td>    
-			          <td><form:input path="department" /></td>  
-			         </tr>   
-			         
+			         </tr> 
 			         <tr>    
 			          <td colspan="2"><input type="submit" value="Save" /></td>    
 			         </tr>    
