@@ -20,8 +20,8 @@ public class WelcomeController {
 		return "Secured Hello";
 	}
 	
-	@PreAuthorize("hasAnyRole('USER')")
-	@GetMapping("/secured/allPeople")
+//	@PreAuthorize("hasAnyRole('USER')")
+	@GetMapping("/secured/allpeople")
 	public String securedHelloForPeople() {
 		return "Secured Hello FOR PEOPLE";
 	}

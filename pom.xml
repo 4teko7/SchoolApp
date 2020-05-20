@@ -53,6 +53,17 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- FOR AUTO REFRESH -->
+			<dependency>
+		    	<groupId>org.springframework.boot</groupId>
+		    	<artifactId>spring-boot-devtools</artifactId>
+		    	<optional>true</optional>
+			</dependency>
+		<!-- END OF AUTO REFRESH -->
+
+			
+			
 	</dependencies>
 
 	<build>
