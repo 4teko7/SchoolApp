@@ -23,17 +23,7 @@
 		
 		
 		
-		
-		<c:forEach items="${users}" var="user">
-		
-				<c:url var = "deleteLink" value="/users/deleteuser">
-					<c:param name="id" value="${user.id}" />
-				</c:url>
-				<c:url var = "updateLink" value="/users/updateuser">
-					<c:param name="id" value="${user.id}" />
-				</c:url>
-			
-			    <table>
+		<table>
 				    <theader>
 							    <tr>   
 						    		  <th>Active</th> 
@@ -44,6 +34,16 @@
 							          <th>Password</th>
 						       </tr>    
 			       </theader>  
+		<c:forEach items="${users}" var="user">
+		
+				<c:url var = "deleteLink" value="/users/deleteuser">
+					<c:param name="id" value="${user.id}" />
+				</c:url>
+				<c:url var = "updateLink" value="/users/updateuser">
+					<c:param name="id" value="${user.id}" />
+				</c:url>
+			
+			    
 					<tbody>        
 				    	<tr>    
 				    		<td>${user.active}</td>
@@ -56,11 +56,11 @@
 			    			 <td><a href="${deleteLink}" onclick="if (! (confirm ('Are You Sure ?'))) return false">Delete</a></td>
 				         </tr>  
 				   </tbody>
-			  </table> 
+
 			
 
 			</c:forEach>
-			
+				  </table> 		
 			
 		
 		</div>
@@ -70,11 +70,10 @@
 	</div>
 	<br>
 				<div style="clear; both;"></div> 
-	
-				<a href="${pageContext.request.contextPath}/users/adduser">Add User</a>
+				
 				<a href="${pageContext.request.contextPath}/users/registration">Registration</a>
 				<a href="${pageContext.request.contextPath}/users/login">Login</a>
-				<a href="${pageContext.request.contextPath}/todos/todos">Todos</a>
+				<%-- <a href="${pageContext.request.contextPath}/todos/todos">Todos</a> --%>
 		
 </body>
 </html>
