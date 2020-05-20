@@ -42,8 +42,9 @@ public class SecuredController {
 	public String getAllUsers(Model theModel,Principal principle,Authentication authentication,HttpSession session, HttpServletRequest request,  ModelMap   modelMap) {
 		List<User> users = userService.findAll();
 		theModel.addAttribute("users",users);
-		if(checkRoles.hasRole("ROLE ADMIN")) return "users";
-		else return "home";
+		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
+		
+		return "users2";
 
 	}
 	
