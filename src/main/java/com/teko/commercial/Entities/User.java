@@ -31,21 +31,48 @@ public class User {
 	@Column(name = "active")
 	private int active;
 	
+	@Column(name = "username")
+	private String username;
+	
+
+	@Column(name = "password")
+	private String password;
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinTable(name = "userRole", joinColumns = @JoinColumn(name = "user"))
 	private Set<Role> roles;
 
-	public User(int id, String email, String name, int active, Set<Role> roles) {
+	public User(int id, String email, String name,String username, String password, int active, Set<Role> roles) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.name = name;
+		this.username = username;
 		this.active = active;
 		this.roles = roles;
+		this.password = password;
 	}
 
 	public User() {
 		super();
+	}
+
+	public User(User user) {
+		this.active = user.getActive();
+		this.email = user.getEmail();
+		this.username = user.getUsername();
+		this.password = user.getPassword();
+		this.roles = user.getRoles();
+		this.name = user.getName();
+		this.id = user.getId();
 	}
 
 	public int getId() {
@@ -86,6 +113,14 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	

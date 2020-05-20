@@ -1,5 +1,6 @@
-package com.teko.controllers;
+package com.teko.commercial.controllers;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,9 +14,16 @@ public class WelcomeController {
 		return "Hello From All";
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/secured/all")
 	public String securedHello() {
 		return "Secured Hello";
+	}
+	
+	@PreAuthorize("hasAnyRole('USER')")
+	@GetMapping("/secured/allPeople")
+	public String securedHelloForPeople() {
+		return "Secured Hello FOR PEOPLE";
 	}
 	
 }
