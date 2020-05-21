@@ -26,6 +26,8 @@ public class UserDetailsServiceImp implements UserDetailsService {
 	@Autowired
 	private UserRoleRepository userRoleRepo;
 	
+	@Autowired
+	private RoleRepository roleRepo;
 	
 	
 	@Autowired
@@ -43,11 +45,8 @@ public class UserDetailsServiceImp implements UserDetailsService {
 		entity.setPassword(encodeDecode.encode(entity.getPassword()));
 		entity.setPasswordConfirm(encodeDecode.encode(entity.getPasswordConfirm()));
 		List<UserRole> userRoles = userRoleRepo.findByuserId(entity.getId());
-		if(userRoles.isEmpty()) entity.setRoles(Arrays.asList(new Role("USER")));
+		if(userRoles.isEmpty()) entity.setRoles(Arrays.asList(roleRepo.findById(2)));
 		else entity.setRoles(userRoleService.getAllRolesFromList(userRoles));
-		System.out.println(entity.getRoles());
-		
-
 		userRepository.save(entity);
 		}
 	
