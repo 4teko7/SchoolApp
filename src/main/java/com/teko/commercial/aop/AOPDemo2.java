@@ -30,7 +30,7 @@ public class AOPDemo2 {
 //	@Pointcut("forRoot() & !(forHome() || forAddUser())")  // This works only at root page.
 	private void forRootHomeAndAddUser() {}
 	
-	@Before("forRootHomeAndAddUser()")
+//	@Before("forRootHomeAndAddUser()")
 	public void beforeHomeAdvice() {
 
 		System.out.println("BEFORE FROM AOPDEMO 2");
