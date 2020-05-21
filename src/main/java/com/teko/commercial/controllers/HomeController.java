@@ -25,6 +25,12 @@ public class HomeController {
 		return "home";
 		}
 	
+	
+	@GetMapping("/")
+	public String root(@RequestParam(required = false) boolean loginsuccess,Model theModel) {
+
+		return "home";
+		}
 
 	
 	
