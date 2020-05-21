@@ -61,21 +61,21 @@ public class SecuredController {
 	}
 	
 //	@PreAuthorize("hasAnyRole('ADMIN')")
-	@RequestMapping(value="adduser", method = RequestMethod.GET)
-	public String showFormForAddUser(Model theModel) {
-		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
-		User user = new User();
-		theModel.addAttribute("user",user);
-		return "addUserForm";
-	}
+//	@RequestMapping(value="adduser", method = RequestMethod.GET)
+//	public String showFormForAddUser(Model theModel) {
+//		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
+//		User user = new User();
+//		theModel.addAttribute("user",user);
+//		return "addUserForm";
+//	}
 	
 //	@PreAuthorize("hasAnyRole('ADMIN')")
-	@RequestMapping(value="adduser", method = RequestMethod.POST)
-	public String addTodo(@ModelAttribute("user") User user) {
-		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
-		userService.save(user);
-		return "redirect:/secured/users";
-	}
+//	@RequestMapping(value="adduser", method = RequestMethod.POST)
+//	public String addUser(@ModelAttribute("user") User user) {
+//		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
+//		userService.save(user);
+//		return "redirect:/secured/users";
+//	}
 	
 //	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="deleteuser", method = RequestMethod.GET)

@@ -29,22 +29,39 @@ public class AOPDemo {
 //	@Before("execution(public String com.teko.commercial.controllers.HomeController.root(boolean,org.springframework.ui.Model))") //This works also.
 	
 	
-	@Pointcut("execution(public String com.teko.commercial.controllers.HomeController.root(boolean,org.springframework.ui.Model))")
-	private void forRootPointCut() {}
+//	@Pointcut("execution(public String com.teko.commercial.controllers.HomeController.root(boolean,org.springframework.ui.Model))")
 	
-	@Before("forRootPointCut()")
+	
+	@Pointcut("execution(* root*(..)))")
+	private void forRoot() {}
+	
+	@Pointcut("execution(* home*(..)))")
+	private void forHome() {}
+	
+	@Pointcut("execution(* registerUser*(..)))")
+	private void forAddUser() {}
+	
+	
+	
+	
+//	@Pointcut("forRoot() || forHome() || forAddUser()")  This is okay when anyone of then is called, then this pointcut will be active
+	
+	@Pointcut("forRoot() & !(forHome() || forAddUser())")  // This works only at root page.
+	private void forRootHomeAndAddUser() {}
+	
+	@Before("forRootHomeAndAddUser()")
 	public void beforeHomeAdvice() {
 		
 		EncodeDecode en = new EncodeDecode();
 		
 		System.out.println(en.encode("merhaba"));
-		System.out.println(en.decode(en.encode("merhaba")));
+		System.out.println(en.decode(en.encode("merhaba2")));
 		System.out.println("BEFORE HOME WAS EXECUTED !");
 	}
 	
-	@Before("forRootPointCut()")
-	public void sayHello() {
-		System.out.println("HELLO FROM SAY HELLO");
-	}
+//	@Before("forRootPointCut()")
+//	public void sayHello() {
+//		System.out.println("HELLO FROM SAY HELLO2");
+//	}
 	
 }

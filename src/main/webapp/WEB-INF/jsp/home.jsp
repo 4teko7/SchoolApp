@@ -140,7 +140,7 @@ h2 a {
 <div style = "display: flex; justify-content: center;">
 
 <button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/secured/users' ">Users</button>
-<button style = "margin-left:3rem; color:green"  class = "btn btn-info" onclick="window.location.href = '${pageContext.request.contextPath}/secured/adduser'">Add User</button>
+<%-- <button style = "margin-left:3rem; color:green"  class = "btn btn-info" onclick="window.location.href = '${pageContext.request.contextPath}/secured/adduser'">Add User</button> --%>
 <button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/login' ">Login</button>
 <button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/logout' ">Logout</button></div>
 
