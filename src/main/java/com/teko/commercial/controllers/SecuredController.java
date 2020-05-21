@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teko.commercial.Entities.User;
+import com.teko.commercial.encryption.EncodeDecode;
+import com.teko.commercial.repositories.RoleRepository;
 import com.teko.commercial.services.UserDetailsServiceImp;
 import com.teko.commercial.utils.CheckRoles;
 
@@ -31,6 +34,12 @@ public class SecuredController {
 
 	@Autowired
 	private UserDetailsServiceImp userService;
+	
+	@Autowired
+	private RoleRepository roleRepository;
+	
+	private EncodeDecode encodeDecode = new EncodeDecode();
+//	private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
 	CheckRoles checkRoles = new CheckRoles();
 //	@PreAuthorize("hasAnyRole('ADMIN')")
@@ -81,6 +90,9 @@ public class SecuredController {
 	public String updateUser(@RequestParam("id") int theId,Model theModel) {
 		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
 		User user = userService.findById(theId);
+//		user.setRoles(roles);
+		user.setPassword(encodeDecode.decode(user.getPassword()));
+		user.setPasswordConfirm(encodeDecode.decode(user.getPasswordConfirm()));
 		theModel.addAttribute("user",user);
 		return "addUserForm";
 	}

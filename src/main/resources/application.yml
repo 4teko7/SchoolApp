@@ -10,7 +10,7 @@ spring:
 #        validation-query: 
     jpa:
         show-sql: true
-        hibernate.ddl-auto: validate
+        hibernate.ddl-auto: update
     messages.basename: validation
      
 spring.jpa.database-platform: org.hibernate.dialect.MySQL57Dialect

@@ -73,6 +73,7 @@ public class UserController {
 	@PostMapping("/login")
 	public String loginUser(@ModelAttribute("user") User user,Authentication authentication) {
 //		if(authentication.isAuthenticated()) return "home";
+		System.out.println("asdasd");
 		
 		return "login";
 	}

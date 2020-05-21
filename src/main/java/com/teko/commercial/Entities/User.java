@@ -1,5 +1,8 @@
 package com.teko.commercial.Entities;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -57,9 +60,9 @@ public class User {
 	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinTable(name = "userRole", joinColumns = @JoinColumn(name = "userId",referencedColumnName = "id"), inverseJoinColumns =  @JoinColumn(name = "roleId",referencedColumnName = "id"))
 //	@JoinColumn(name = "userRole")
-	private Set<Role> roles;
+	private List<Role> roles;
 
-	public User(int id, String email, String name,String username, String password, int active, Set<Role> roles) {
+	public User(int id, String email, String name,String username, String password, int active, List<Role> roles) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -75,6 +78,7 @@ public class User {
 	}
 
 	public User(User user) {
+		if(user == null) return;
 		this.active = user.getActive();
 		this.email = user.getEmail();
 		this.username = user.getUsername();
@@ -116,11 +120,11 @@ public class User {
 		this.active = active;
 	}
 
-	public Set<Role> getRoles() {
+	public List<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<Role> roles) {
+	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
 	
