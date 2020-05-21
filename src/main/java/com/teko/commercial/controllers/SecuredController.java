@@ -1,6 +1,7 @@
 package com.teko.commercial.controllers;
 
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.teko.commercial.Entities.Role;
 import com.teko.commercial.Entities.User;
 import com.teko.commercial.encryption.EncodeDecode;
 import com.teko.commercial.repositories.RoleRepository;
@@ -42,12 +44,8 @@ public class SecuredController {
 //	private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
 	CheckRoles checkRoles = new CheckRoles();
-//	@PreAuthorize("hasAnyRole('ADMIN')")
-//	@IsAdmin
-//	@PreAuthorize("hasRole('ADMIN')")
-//	@PreAuthorize("hasAnyRole('ADMIN', 'ROLE_USER')")
+
 	@GetMapping("/users")
-//	@PreAuthorize("hasAnyRole('ROLE ADMIN')")
 	public String getAllUsers(Model theModel,Principal principle,Authentication authentication,HttpSession session, HttpServletRequest request,  ModelMap   modelMap) {
 		List<User> users = userService.findAll();
 		theModel.addAttribute("users",users);
@@ -70,12 +68,24 @@ public class SecuredController {
 //	}
 	
 //	@PreAuthorize("hasAnyRole('ADMIN')")
-//	@RequestMapping(value="adduser", method = RequestMethod.POST)
-//	public String addUser(@ModelAttribute("user") User user) {
-//		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
-//		userService.save(user);
-//		return "redirect:/secured/users";
-//	}
+	@RequestMapping(value="adduser", method = RequestMethod.POST)
+	public String addUser(HttpServletRequest request, @ModelAttribute("user") User user) {
+		
+		if(request.getParameter("makeAdmin") != null) {
+			Role role = new Role();
+			role.setid(1);
+			role.setRole("ADMIN");
+			user.setRoles(Arrays.asList(role));
+		}else if(request.getParameter("makeUser") != null) {
+			Role role = new Role();
+			role.setid(2);
+			role.setRole("USER");
+			user.setRoles(Arrays.asList(role));
+		}
+		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
+		userService.save(user);
+		return "redirect:/secured/users";
+	}
 	
 //	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="deleteuser", method = RequestMethod.GET)
@@ -94,7 +104,7 @@ public class SecuredController {
 		user.setPassword(encodeDecode.decode(user.getPassword()));
 		user.setPasswordConfirm(encodeDecode.decode(user.getPasswordConfirm()));
 		theModel.addAttribute("user",user);
-		return "addUserForm";
+		return "updateUser";
 	}
 	
 	

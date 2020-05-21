@@ -47,6 +47,8 @@
                   <form:input name="password" path = "password" type="password" class="form-control" placeholder="Password"/>
                   <form:input name="passwordConfirm" path = "passwordConfirm" type="password" class="form-control" placeholder="Password Confirm"/> 
                   <form:input name="username" path = "username" type="text" class="form-control" placeholder="Username"/> 
+                  <input name="makeAdmin" type="radio" value="admin" />Make Admin
+                  <input name="makeUser" type="radio" value="user" />Make User
                    <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
             		<h4 class="text-center"><a href="${pageContext.request.contextPath}/secured/users/">Go Users</a></h4>
             

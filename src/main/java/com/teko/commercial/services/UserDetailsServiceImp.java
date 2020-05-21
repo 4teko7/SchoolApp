@@ -44,12 +44,14 @@ public class UserDetailsServiceImp implements UserDetailsService {
 		entity.setActive(1);
 		entity.setPassword(encodeDecode.encode(entity.getPassword()));
 		entity.setPasswordConfirm(encodeDecode.encode(entity.getPasswordConfirm()));
-		List<UserRole> userRoles = userRoleRepo.findByuserId(entity.getId());
-		if(userRoles.isEmpty()) entity.setRoles(Arrays.asList(roleRepo.findById(2)));
-		else entity.setRoles(userRoleService.getAllRolesFromList(userRoles));
-		userRepository.save(entity);
+		if(entity.getRoles().isEmpty()) {
+			List<UserRole> userRoles = userRoleRepo.findByuserId(entity.getId());
+			if(userRoles.isEmpty()) entity.setRoles(Arrays.asList(roleRepo.findById(2)));
+			else entity.setRoles(userRoleService.getAllRolesFromList(userRoles));
 		}
-	
+		userRepository.save(entity);
+	}
+		
 	public List<User> findAll() {return userRepository.findAll();}
 	
 	public User findById(int id) {return userRepository.findById(id);}
