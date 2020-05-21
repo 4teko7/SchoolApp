@@ -127,7 +127,7 @@ h2 a {
 
 <table class="container" >
 <div style = "display: flex; justify-content: center;"><button style = "color:green"  class = "btn btn-info" onclick="window.location.href = '${pageContext.request.contextPath}/registration'">Add User</button>
-<button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/login' ">Login</button></div>
+<%if (request.getRemoteUser() == null) {%><button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/login' ">Login</button><%}%></div>
 	<thead>
 	
 		<tr>

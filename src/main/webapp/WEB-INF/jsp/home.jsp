@@ -139,10 +139,32 @@ h2 a {
 
 <div style = "display: flex; justify-content: center;">
 
-<button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/secured/users' ">Users</button>
+
+<%--
+	CHECKS AUTHENTICATIONS
+
+
+ <sec:authorize access="isAnonymous()">
+    <form method="POST" action="<c:url value='j_spring_security_check'/>">
+        Username: <input name="j_username" type="text" value="${SPRING_SECURITY_LAST_USERNAME}" /> 
+        Password: <input name="j_password" type="password" /> 
+        <input type="submit" value="Sign in" />
+    </form>
+</sec:authorize>
+<sec:authorize access="isAuthenticated()">
+    <a href="<c:url value="/j_spring_security_logout" />">Logout</a>
+</sec:authorize> --%>
+
+
+
+<%if (request.getRemoteUser() != null) {%><button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/secured/users' ">Users</button><%}%>
 <%-- <button style = "margin-left:3rem; color:green"  class = "btn btn-info" onclick="window.location.href = '${pageContext.request.contextPath}/secured/adduser'">Add User</button> --%>
-<button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/login' ">Login</button>
-<button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/logout' ">Logout</button></div>
+<%if (request.getRemoteUser() == null) {%> <button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/login' ">Login</button><%}%>
+<%if (request.getRemoteUser() != null) {%><button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/logout' ">Logout</button></div><%}%>
+
+
+
+
 
 
 <!-- 	<thead>
