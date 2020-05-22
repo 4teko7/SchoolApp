@@ -13,10 +13,13 @@
 		<tr>
 			<th><h1>Active</h1></th>
 			<th><h1 style = "margin-right:2rem;">ID</h1></th>
-			<th><h1 style = "margin-right:1rem;">Name</h1></th>
-			<th><h1>Email</h1></th>
+			<th><h1 style = "margin-right:1rem;">Firstname</h1></th>
+			<th><h1 style = "margin-right:1rem;">Lastname</h1></th>
 			<th><h1>Username</h1></th>
-			<th><h1>Password</h1></th>
+			<th><h1>Email</h1></th>
+			<th><h1>Phone</h1></th>
+			<th><h1>School</h1></th>
+			<th><h1>Class</h1></th>
 			<th><h1 style = "margin-right:2rem;">Update</h1></th>
 			<th><h1 style = "margin-right:2rem;">Delete</h1></th>
 		</tr>
@@ -38,10 +41,13 @@
 			    	<tr>    
 			    		<td>${user.active}</td>
 			             <td>${user.id}</td>  
-			         	 <td>${user.name}</td>  
+			         	 <td>${user.firstname}</td>
+			         	 <td>${user.lastname}</td>  
+			         	 <td>${user.username}</td>
 			         	 <td>${user.email}</td>  
-			         	 <td>${user.username}</td>  
-			         	 <td>${user.password}</td>
+		         	   	 <td>${user.phone}</td>
+		         	   	 <td>${user.school}</td> 
+			         	 <td>${user.classNumber}</td>
 			         	 <td><a style = "color:green" href="${updateLink}" >Update</a></td>
 		    			 <td><a style = "color:red" href="${deleteLink}" onclick="if (! (confirm ('Are You Sure ?'))) return false">Delete</a></td>
 			         </tr>  

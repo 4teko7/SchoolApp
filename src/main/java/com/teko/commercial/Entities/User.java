@@ -31,8 +31,22 @@ public class User {
 	@Column(name = "email")
 	private String email;
 	
-	@Column(name="name")
-	private String name;
+	@Column(name="firstname")
+	private String firstname;
+	
+	@Column(name="lastname")
+	private String lastname;
+	
+	@Column(name="phone")
+	private String phone;
+	
+	
+
+	@Column(name="classNumber")
+	private int classNumber;
+	
+	@Column(name="school")
+	private String school;
 	
 	@Column(name = "active")
 	private int active;
@@ -62,15 +76,39 @@ public class User {
 //	@JoinColumn(name = "userRole")
 	private List<Role> roles;
 
-	public User(int id, String email, String name,String username, String password, int active, List<Role> roles) {
+
+
+	public User(int id, String email, String firstname, String lastname, String phone, int classNumber, String school,
+		int active, String username, String password, String passwordConfirm, List<Role> roles) {
 		super();
 		this.id = id;
 		this.email = email;
-		this.name = name;
-		this.username = username;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.phone = phone;
+		this.classNumber = classNumber;
+		this.school = school;
 		this.active = active;
-		this.roles = roles;
+		this.username = username;
 		this.password = password;
+		this.passwordConfirm = passwordConfirm;
+		this.roles = roles;
+	}
+
+	public User(String email, String firstname, String lastname, String phone, int classNumber, String school,
+			int active, String username, String password, String passwordConfirm, List<Role> roles) {
+		super();
+		this.email = email;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.phone = phone;
+		this.classNumber = classNumber;
+		this.school = school;
+		this.active = active;
+		this.username = username;
+		this.password = password;
+		this.passwordConfirm = passwordConfirm;
+		this.roles = roles;
 	}
 
 	public User() {
@@ -79,13 +117,17 @@ public class User {
 
 	public User(User user) {
 		if(user == null) return;
-		this.active = user.getActive();
 		this.email = user.getEmail();
+		this.firstname = user.getFirstname();
+		this.lastname = user.getLastname();
+		this.phone = user.getPhone();
+		this.classNumber = user.getClassNumber();
+		this.school = user.getSchool();
+		this.active = user.getActive();
 		this.username = user.getUsername();
 		this.password = user.getPassword();
+		this.passwordConfirm = user.getPasswordConfirm();
 		this.roles = user.getRoles();
-		this.name = user.getName();
-		this.id = user.getId();
 	}
 
 	public int getId() {
@@ -104,13 +146,6 @@ public class User {
 		this.email = email;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public int getActive() {
 		return active;
@@ -144,6 +179,44 @@ public class User {
 		this.passwordConfirm = passwordConfirm;
 	}
 	
-	
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public int getClassNumber() {
+		return classNumber;
+	}
+
+	public void setClassNumber(int classNumber) {
+		this.classNumber = classNumber;
+	}
+
+	public String getSchool() {
+		return school;
+	}
+
+	public void setSchool(String school) {
+		this.school = school;
+	}
 	
 }

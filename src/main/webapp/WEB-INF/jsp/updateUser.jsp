@@ -38,14 +38,29 @@
 			<form:form action="/secured/adduser" modelAttribute="user" method="POST"  class="form-signin">
 			<h2 class="form-heading"><scan style = "font-size:3rem;"><b>Update User</b></scan></h2>
 	  			<form:hidden path="id" />
-	  			
-	  			
-	  			<form:input name="name" path = "name" type="text" class="form-control" placeholder="Name"
-                   autofocus="true"/>
-                 <form:input name="email" path = "email" type="text" class="form-control" placeholder="Email"/>
+	  			<%-- 
+	  					<td>${user.active}</td>
+			             <td>${user.id}</td>  
+			         	 <td>${user.firstname}</td>
+			         	 <td>${user.lastname}</td>  
+			         	 <td>${user.username}</td>
+			         	 <td>${user.email}</td>  
+		         	   	 <td>${user.phone}</td>
+		         	   	 <td>${user.school}</td> 
+			         	 <td>${user.classNumber}</td> --%>
+                 
+                  
+                  <form:input name="username" path = "firstname" type="text" class="form-control" placeholder="Firstname"/> 
+                  <form:input name="username" path = "lastname" type="text" class="form-control" placeholder="Lastname"/> 
+                  <form:input name="username" path = "username" type="text" class="form-control" placeholder="Username" autofocus="true"/>
                   <form:input name="password" path = "password" type="password" class="form-control" placeholder="Password"/>
-                  <form:input name="passwordConfirm" path = "passwordConfirm" type="password" class="form-control" placeholder="Password Confirm"/> 
-                  <form:input name="username" path = "username" type="text" class="form-control" placeholder="Username"/> 
+                  <form:input name="passwordConfirm" path = "passwordConfirm" type="password" class="form-control" placeholder="Password Confirm"/>
+                  <form:input name="email" path = "email" type="text" class="form-control" placeholder="Email"/>
+                  <form:input name="username" path = "phone" type="text" class="form-control" placeholder="Phone"/> 
+                  <form:input name="username" path = "school" type="text" class="form-control" placeholder="School"/> 
+                  <form:input name="username" path = "classNumber" type="text" class="form-control" placeholder="Class"/> 
+                   
+                  
                   <input name="makeAdmin" type="radio" value="admin" />Make Admin
                   <input name="makeUser" type="radio" value="user" />Make User
                    <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
