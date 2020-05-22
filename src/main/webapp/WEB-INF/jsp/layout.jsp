@@ -1,3 +1,4 @@
+<jsp:include page="navbar.jsp"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>    
@@ -11,7 +12,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Layout</title>
-  <div ><button  class = "btn btn-info" style = "margin-left:5%; margin-right:90%; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/home' ">Home</button></div>
   
 <style>
 <!--

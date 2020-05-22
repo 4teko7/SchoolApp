@@ -1,4 +1,3 @@
-
 <jsp:include page="layout.jsp"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 
@@ -39,15 +38,22 @@
 
 
 
-<%if (request.getRemoteUser() != null) {%><button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/secured/users' ">Users</button><%}%>
-<%-- <button style = "margin-left:3rem; color:green"  class = "btn btn-info" onclick="window.location.href = '${pageContext.request.contextPath}/secured/adduser'">Add User</button> --%>
-<%if (request.getRemoteUser() == null) {%> <button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/login' ">Login</button><%}%>
-<%if (request.getRemoteUser() == null) {%> <button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/registration' ">Register</button><%}%>
-<%if (request.getRemoteUser() != null) {%><button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/logout' ">Logout</button></div><%}%>
+
+
 
 
 
 </table>
 <div style="clear; both;"></div> 
+
+
+
+
+
+
+
+
+
+
 					
 				

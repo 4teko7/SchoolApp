@@ -78,7 +78,16 @@ public class UserController {
 		return "login";
 	}
 	
+	@GetMapping("/profile")
+	public String userProfile(Model theModel, Authentication authentication) {
+		if(authentication != null && authentication.isAuthenticated()) {
+//        	theModel.addAttribute("message","You Logged In Successfully.");
+        	return "profile";
+        }
+//		theModel.addAttribute("user",new User());
+		return "login";
 	
+	}
 	
 	
 	
