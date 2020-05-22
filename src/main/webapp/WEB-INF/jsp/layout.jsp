@@ -1,12 +1,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
- <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
-    
-    <h1><span class="blue"><span class="yellow">USERS</pan></h1><hr>
+    pageEncoding="UTF-8"%>    
 
+<link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet">
+ 
+ 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Layout</title>
+  <div ><button  class = "btn btn-info" style = "margin-left:5%; margin-right:90%; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/home' ">Home</button></div>
+  
 <style>
 <!--
 
@@ -123,58 +129,11 @@ h2 a {
 }
 -->
 </style>
-<table class="container" >
-<div style = "display: flex; justify-content: center;"><button style = "color:green"  class = "btn btn-info" onclick="window.location.href = '${pageContext.request.contextPath}/registration'">Add User</button>
-<button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/login' ">Login</button></div>
-	<thead>
-	
-		<tr>
-			<th><h1>Active</h1></th>
-			<th><h1 style = "margin-right:2rem;">ID</h1></th>
-			<th><h1 style = "margin-right:1rem;">Name</h1></th>
-			<th><h1>Email</h1></th>
-			<th><h1>Username</h1></th>
-			<th><h1>Password</h1></th>
-			<th><h1 style = "margin-right:2rem;">Update</h1></th>
-			<th><h1 style = "margin-right:2rem;">Delete</h1></th>
-		</tr>
-	</thead>
-	
-	<tbody>  
-		<c:forEach items="${users}" var="user">
-		
-				<c:url var = "deleteLink" value="/secured/deleteuser">
-					<c:param name="id" value="${user.id}" />
-				</c:url>
-				<c:url var = "updateLink" value="/secured/updateuser">
-					<c:param name="id" value="${user.id}" />
-				</c:url>
-			
-			    
-					
-
-			    	<tr>    
-			    		<td>${user.active}</td>
-			             <td>${user.id}</td>  
-			         	 <td>${user.name}</td>  
-			         	 <td>${user.email}</td>  
-			         	 <td>${user.username}</td>  
-			         	 <td>${user.password}</td>
-			         	 <td><a style = "color:green" href="${updateLink}" >Update</a></td>
-		    			 <td><a style = "color:red" href="${deleteLink}" onclick="if (! (confirm ('Are You Sure ?'))) return false">Delete</a></td>
-			         </tr>  
-				   
-
-			</c:forEach>
-			</tbody>
-</table>
 
 
+</head>
+<body>
 
 
-		<div style="clear; both;"></div> 
-				
-
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="${contextPath}/resources/js/bootstrap.min.js"></script>		
-				
+</body>
+</html>

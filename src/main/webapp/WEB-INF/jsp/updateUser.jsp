@@ -1,3 +1,4 @@
+<jsp:include page="layout.jsp"/>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -8,9 +9,7 @@
 <html lang="en">
   <head>
       <meta charset="utf-8">
-	<title>Add User</title>	
-	<link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-      <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
+	<title>Update User</title>	
   </head>  
 </head>
 
@@ -37,7 +36,7 @@
     
     <div class="container">
 			<form:form action="/secured/adduser" modelAttribute="user" method="POST"  class="form-signin">
-			<h2 class="form-heading">Save User</h2>
+			<h2 class="form-heading"><scan style = "font-size:3rem;"><b>Update User</b></scan></h2>
 	  			<form:hidden path="id" />
 	  			
 	  			
@@ -89,8 +88,6 @@
 		  
 	</div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
     
 </body>
 

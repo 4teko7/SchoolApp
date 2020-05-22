@@ -1,3 +1,4 @@
+<jsp:include page="layout.jsp"/>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -9,19 +10,6 @@
       <meta charset="utf-8">
       <title>Create an account</title>
 
-      <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-      <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
-	
-	<style type="text/css">
-      
-      body {
-		  font-family: 'Open Sans', sans-serif;
-		  font-weight: 300;
-		  line-height: 1.42em;
-		  color:#A7A1AE;
-		  background-color:#1F2739;
-		}
-      </style>
 
   </head>
 
@@ -32,7 +20,7 @@
     <div class="container">
 		<h3 class="text-center"><a href="${contextPath}/home">Home</a></h3>
         <form:form method="POST" modelAttribute="user" action="/registration" class="form-signin">
-            <h2 class="form-signin-heading">Create your account</h2>
+            <h2 class="form-heading"><scan style = "font-size:3rem;"><b>Registration</b></scan></h2>
             <spring:bind path="username">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="text" path="username" class="form-control" placeholder="Username"
@@ -62,7 +50,5 @@
 
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
   </body>
 </html>

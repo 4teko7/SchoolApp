@@ -1,3 +1,4 @@
+<jsp:include page="layout.jsp"/>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -10,18 +11,7 @@
       <meta charset="utf-8">
       <title>Log in with your account</title>
 
-      <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-      <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
-      <style type="text/css">
-      
-      body {
-		  font-family: 'Open Sans', sans-serif;
-		  font-weight: 300;
-		  line-height: 1.42em;
-		  color:#A7A1AE;
-		  background-color:#1F2739;
-		}
-      </style>
+
   </head>
 
   <body>
@@ -29,10 +19,22 @@
     <div class="container">
     <h3 class="text-center"><a href="${contextPath}/home">Home</a></h3>
       <form method="POST" action="${contextPath}/login" modelAttribute="user" class="form-signin">
-        <h2 class="form-heading">Log in</h2>
+        <h2 class="form-heading"><scan style = "font-size:3rem;"><b>Log in</b></scan></h2>
 
         <div class="form-group ${error != null ? 'has-error' : ''}">
-            <div class="alert alert-success">${message}</div>
+            
+	            <table class = "container">
+					<c:if test="${message != null}">
+					    </div><div style = "" class="alert alert-success">
+						<span style = "display:flex; justify-content:center;">${message}</span>
+						</div>
+						<br>  
+					</c:if>
+					
+				</table>
+            
+            
+            
             <input name="username" type="text" class="form-control" placeholder="Username"
                    autofocus="true"/>
             <input name="password" type="password" class="form-control" placeholder="Password"/>
@@ -45,7 +47,5 @@
       </form>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
   </body>
 </html>
