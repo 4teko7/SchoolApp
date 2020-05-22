@@ -3,6 +3,8 @@ package com.teko.commercial.controllers;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -79,9 +81,10 @@ public class UserController {
 	}
 	
 	@GetMapping("/profile")
-	public String userProfile(Model theModel, Authentication authentication) {
+	public String userProfile(Model theModel, Authentication authentication,HttpServletRequest request) {
 		if(authentication != null && authentication.isAuthenticated()) {
 //        	theModel.addAttribute("message","You Logged In Successfully.");
+			theModel.addAttribute("user",userService.findByUsername(request.getRemoteUser()));
         	return "profile";
         }
 //		theModel.addAttribute("user",new User());

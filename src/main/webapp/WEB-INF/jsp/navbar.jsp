@@ -4,7 +4,7 @@
     pageEncoding="UTF-8"%>
 
 
-<link href="../../resources/css/home.css" rel="stylesheet" id="bootstrap-css">
+<link href="../../resources/css/navbar.css" rel="stylesheet" id="bootstrap-css">
 
 <% request.getClass(); %>
   <div class="row">
