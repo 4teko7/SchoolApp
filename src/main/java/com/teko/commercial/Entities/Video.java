@@ -122,14 +122,6 @@ public void setId(int id) {
 }
 
 
-public String getname() {
-	return name;
-}
-
-
-public void setname(String name) {
-	this.name = name;
-}
 
 
 public String getMimeType() {
@@ -170,12 +162,7 @@ public void setPath(String path) {
 	this.path = path;
 }
    
-   
-@Override
-public String toString() {
-	return "Video [id=" + id + ", name=" + name + ", mimeType=" + mimeType + ", extension=" + extension + ", path="
-			+ path + ", videoContent=" + videoContent + ", videoSubject=" + videoSubject + ", user=" + user + "]";
-}
+
 	   
 //	   @Column("length")
 //	   private Long contetLen;

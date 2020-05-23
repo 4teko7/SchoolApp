@@ -31,39 +31,26 @@
 			
 	  			<form:hidden path="id" />
 
-
+					<!-- For Video Upload -->
 					<div class="row" style = "display:flex; justify-content: center; margin-top:2rem;">
                     <div class="col-md-4">
                         <div class="profile-img">
-                        
-						
                              <div class="videoUpload btn btn-lg btn-primary">
                                 Choose Photo
                                 <input id = "imgInput" type="file" name="file" />
-                                
                             </div>
-                            
-                            
-                            
-                            
                         </div>
                         <div  class ="col-md-4 col-md-offset-4" style = "display:flex;justify-content: center">
                     </div>     
                     </div>
   					</div>
+                 <!-- END OF Video Upload -->
                  
                   <br>
                   <form:input name="name" path = "name" type="text" class="form-control" placeholder="Name Of Video"/> 
                   <form:input name="videoContent" path = "videoContent" type="text" class="form-control" placeholder="Content Of Video"/> 
                   <form:input name="videoSubject" path = "videoSubject" type="text" class="form-control" placeholder="Subject Of Video"/> 
-                  <%-- <form:input name="username" path = "lastname" type="text" class="form-control" placeholder="Lastname"/> --%> 
-<%--                   <form:input name="username" path = "username" type="text" class="form-control" placeholder="Username" autofocus="true"/>
-                  <form:input name="password" path = "password" type="password" class="form-control" placeholder="Password"/>
-                  <form:input name="passwordConfirm" path = "passwordConfirm" type="password" class="form-control" placeholder="Password Confirm"/>
-                  <form:input name="email" path = "email" type="text" class="form-control" placeholder="Email"/>
-                  <form:input name="username" path = "phone" type="text" class="form-control" placeholder="Phone"/> 
-                  <form:input name="username" path = "school" type="text" class="form-control" placeholder="School"/> 
-                  <form:input name="username" path = "classNumber" type="text" class="form-control" placeholder="Class"/>  --%>
+                  
                    
                   
 <!--                   <input name="makeAdmin" type="radio" value="admin" />Make Admin
@@ -93,4 +80,7 @@
   
   
 </body>
+<script type="text/javascript">
+
+</script>
 </html>

@@ -159,12 +159,19 @@ public class SecuredController {
 	}
 	
 	@PostMapping("/uploadvideo")
-	public String uploadVideo(@RequestParam("file") MultipartFile file,Model theModel,Authentication authentication,HttpServletRequest request) {
+	public String uploadVideo(@RequestParam("file") MultipartFile file,@ModelAttribute("video") Video videoFromPage,Model theModel,Authentication authentication,HttpServletRequest request) {
 		if(authentication != null && authentication.isAuthenticated()) {
 //			System.out.println(userService.findByUsername(request.getRemoteUser()));
 			
 			User thisUser = userService.findByUsername(request.getRemoteUser());
 			Video video = userService.uploadVideo(thisUser, file);
+			System.out.println("Video Returned");
+			System.out.println(videoFromPage);
+			video.setVideoContent(videoFromPage.getVideoContent());
+			video.setVideoSubject(videoFromPage.getVideoSubject());
+			video.setName(videoFromPage.getName());
+			videoService.save(video);
+			System.out.println("AFTER SAVING");
 			userService.save(thisUser);
 			
 			theModel.addAttribute("message","Successfully Uploaded.");

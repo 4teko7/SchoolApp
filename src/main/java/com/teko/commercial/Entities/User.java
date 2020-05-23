@@ -295,13 +295,6 @@ public class User {
 		this.password = password;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", active=" + active + ", firstname=" + firstname + ", lastname=" + lastname
-				+ ", username=" + username + ", password=" + password + ", passwordConfirm=" + passwordConfirm
-				+ ", email=" + email + ", phone=" + phone + ", classNumber=" + classNumber + ", school=" + school
-				+ ", photoPath=" + photoPath + ", roles=" + roles + ", videos=" + videos + "]";
-	}
 
 
 
