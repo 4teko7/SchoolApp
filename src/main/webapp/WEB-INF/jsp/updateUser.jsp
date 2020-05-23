@@ -35,6 +35,15 @@
     </div> --%>
     
     <div class="container">
+   				 <table class = "container">
+					<c:if test="${error != null}">
+					    </div><div style = "" class="alert alert-danger">
+						<span style = "display:flex; justify-content:center;">${error}</span>
+						</div>
+						<br>  
+					</c:if>
+					
+				</table>
 			<form:form action="/secured/updateuser" modelAttribute="user" method="POST"  class="form-signin">
 			<h2 class="form-heading"><scan style = "font-size:3rem;"><b>Update User</b></scan></h2>
 	  			<form:hidden path="id" />

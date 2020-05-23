@@ -53,6 +53,11 @@ public class UserValidator implements Validator  {
         if (user.getUsername().length() < 3 || user.getUsername().length() > 32) {
             errors += "Size must larger than 3 and smaller than 32 - ";
         }
+        
+        if (user.getClassNumber().length() > 15 || user.getClassNumber().length() <= 0) {
+            errors += "Please Enter a Valid Class - ";
+        }
+        
         User us = userService.findByUsername(user.getUsername());
         if (us != null && us.getId() != user.getId()) {
             errors += "Username is already taken - ";

@@ -119,10 +119,9 @@ public class SecuredController {
 			String errors = validator.validateForProfileUpdate(user);
 			if (!errors.equals("")) {
 				userService.updateUser(thisUser, user);
-				
 				theModel.addAttribute("user",thisUser);
 				theModel.addAttribute("error",errors);
-	            return "updateprofile";
+	            return "updateUser";
 	        }else {
 			
 				userService.updateUser(thisUser,user);
@@ -135,7 +134,7 @@ public class SecuredController {
 		
 		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
 
-		return "users";
+		return "redirect:/secured/users";
 	}
 	
 	
