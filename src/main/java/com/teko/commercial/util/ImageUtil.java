@@ -3,6 +3,8 @@ package com.teko.commercial.util;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
+import com.teko.commercial.Entities.User;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -14,7 +16,7 @@ public class ImageUtil {
 
 	Date date = new Date();
 	
-    public String resize(HttpServletRequest request,String imagePath, int height, int width) {
+    public String resize(User thisUser, String imagePath, int height, int width) {
     	String uploadDir = "";
     	try {
     	File input = new File(imagePath);
@@ -39,7 +41,7 @@ public class ImageUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	return "uploads/"+ request.getRemoteUser()+"-resized-"+height + "x" + width +"-" + date.getTime() + ".png";
+    	return "uploads/"+ thisUser.getUsername()+"-resized-"+height + "x" + width +"-" + date.getTime() + ".png";
         
         
     }

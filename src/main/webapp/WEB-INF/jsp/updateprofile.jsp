@@ -30,14 +30,19 @@
                     <div class="col-md-4">
                         <div class="profile-img">
                         <c:if test="${user.photoPath != null}">
-                            <img src="${user.photoPath}" alt="Profil Photo"/>
+                            <img id = "profilImg" src="${user.photoPath}" alt="Profil Photo"/>
                             </c:if>
                             <c:if test="${user.photoPath == null}">
-                            <img src="https://via.placeholder.com/300" alt="Profil Photo"/>
+                            <img id = "profilImg" src="https://via.placeholder.com/300" alt="Profil Photo"/>
                             </c:if>
+                            <div class="fileRemove btn btn-lg btn-danger">
+                                Remove Photo
+                                <input type="submit" name="removePhoto" />
+                                
+                            </div>
                              <div class="file btn btn-lg btn-primary">
                                 Change Photo
-                                <input type="file" name="file" />
+                                <input id = "imgInput" type="file" name="file" />
                                 
                             </div>
                             
@@ -229,11 +234,20 @@
 
 <script type="text/javascript">
 
-function setFields() {  
+function showImage(imgInput,target) {
+	  var fr=new FileReader();
+	  // when image is loaded, set the src of the image where you want to display it
+	  fr.onload = function(e) { target.src = this.result; };
+	  src.addEventListener("change",function() {
+	    // fill fr with image data    
+	    fr.readAsDataURL(src.files[0]);
+	  });
+	}
+
+	var src = document.getElementById("imgInput");
+	var target = document.getElementById("profilImg");
+	showImage(src,target);  
   
-              
-}  
-</script>  
 
 </script>
 

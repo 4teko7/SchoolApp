@@ -99,20 +99,18 @@ public class UserDetailsServiceImp implements UserDetailsService {
 	}
 	
 	
-	public void uploadUserImage(User thisUser,User user,MultipartFile file,HttpServletRequest request) {
+	public void uploadUserImage(User thisUser,MultipartFile file) {
 		try {
 			final String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/uploads";
 			if(!file.isEmpty()) {
 	//			System.out.println(path.toAbsolutePath().toString());
 				String time = System.currentTimeMillis() + "";
-				Path fileNameAndPath = Paths.get(uploadDir,file.getOriginalFilename().substring(0,file.getOriginalFilename().length()-4) +"-"+ request.getRemoteUser() + "-"+time+".png");
+				Path fileNameAndPath = Paths.get(uploadDir,file.getOriginalFilename().substring(0,file.getOriginalFilename().length()-4) +"-"+ thisUser.getUsername() + "-"+time+".png");
 	//			String fileNameAndPath = path.toString() + "/" + file.getOriginalFilename();
 				Files.write(fileNameAndPath, file.getBytes());
-				String path = imageUtil.resize(request,fileNameAndPath.toString(),300,300);
-				user.setPhotoPath(path);
+				String path = imageUtil.resize(thisUser,fileNameAndPath.toString(),300,300);
+				
 				thisUser.setPhotoPath(path);
-			}else {
-				user.setPhotoPath(thisUser.getPhotoPath());
 			}
 		}catch(Exception e) {
 			System.out.println(e.getStackTrace());

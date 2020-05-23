@@ -133,7 +133,9 @@ public class UserController {
 		if(authentication != null && authentication.isAuthenticated()) {
 			User thisUser = userService.findById(user.getId());
 			String errors = validator.validateForProfileUpdate(user);
-			userService.uploadUserImage(thisUser, user, file, request);
+			if(request.getParameter("removePhoto") != null) {thisUser.setPhotoPath(null); user.setPhotoPath(null);}
+			else userService.uploadUserImage(thisUser, file);
+			
 			userService.save(thisUser);
 			userService.updateUser(thisUser, user);
 			if (!errors.equals("")) {
