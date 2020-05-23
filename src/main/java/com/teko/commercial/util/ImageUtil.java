@@ -14,9 +14,10 @@ import java.util.Date;
 
 public class ImageUtil {
 
-	Date date = new Date();
+	
 	
     public String resize(User thisUser, String imagePath, int height, int width) {
+    	String time = System.currentTimeMillis() + "";
     	String uploadDir = "";
     	try {
     	File input = new File(imagePath);
@@ -31,17 +32,17 @@ public class ImageUtil {
         
         uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/uploads";
         
-        String outPath = uploadDir + "/teko-resized-"+height + "x" + width +"-" + date.getTime() + ".png";
+        String outPath = uploadDir + "/teko-resized-"+height + "x" + width +"-" + time + ".png";
         File output = new File(outPath);
         
 		ImageIO.write(resized, "png", output);
 			
-		return "uploads/teko-resized-"+height + "x" + width +"-" + date.getTime() + ".png";
+		return "uploads/teko-resized-"+height + "x" + width +"-" + time + ".png";
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	return "uploads/"+ thisUser.getUsername()+"-resized-"+height + "x" + width +"-" + date.getTime() + ".png";
+    	return "uploads/"+ thisUser.getUsername()+"-resized-"+height + "x" + width +"-" + time + ".png";
         
         
     }

@@ -246,6 +246,8 @@ function showImage(imgInput,target) {
 
 	var src = document.getElementById("imgInput");
 	var target = document.getElementById("profilImg");
+
+
 	showImage(src,target);  
   
 
