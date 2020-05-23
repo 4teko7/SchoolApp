@@ -24,8 +24,8 @@
 
 <div class="container emp-profile">
             <%-- <form method="post"> --%>
-            <form:form action="/updateprofile" modelAttribute="user" method="GET">
-            	<form:hidden path="id" />
+            <form:form action="/updateprofile" modelAttribute="user" method="POST">
+            <form:hidden path = "id"/>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
@@ -55,9 +55,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-                    </div>
+                    
                 </div>
                 
                 <div class="row">
@@ -78,22 +76,23 @@
                         </div>
                     </div>
                     <div class="col-md-8">
+                    			<table class = "container">
+									<c:if test="${error != null}">
+									    </div><div style = "" class="alert alert-danger">
+										<span style = "display:flex; justify-content:center;">${error}</span>
+										</div>
+										<br>  
+									</c:if>
+									
+								</table>
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>User Id</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p/>${user.id}</p>
-                                            </div>
-                                        </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>Firstname</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>${user.firstname }</p>
+                                               <b style = "color:red;"><b> <form:input placeholder = "Firstname" path = "firstname"/></b></b>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -101,7 +100,7 @@
                                                 <label>Lastname</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>${user.lastname }</p>
+                                               <b style = "color:red;"><b> <form:input placeholder = "Lastname" path = "lastname"/></b></b>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -109,7 +108,23 @@
                                                 <label>Username</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>${user.username }</p>
+                                               <b style = "color:red;"><b> <form:input placeholder = "Username" path = "username"/></b></b>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Password</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                               <b style = "color:red;"><b> <form:input placeholder = "Password" path = "password"/></b></b>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Password Confirm</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                               <b style = "color:red;"><b> <form:input placeholder = "Password Confirm" path = "passwordConfirm"/></b></b>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -117,7 +132,7 @@
                                                 <label>Email</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>${user.email }</p>
+                                                <b style = "color:red;"><b><form:input placeholder = "Email" path = "email"/></b></b>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -125,7 +140,7 @@
                                                 <label>Phone</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>${user.phone }</p>
+                                                <b style = "color:red;"><b><form:input placeholder = "Phone" path = "phone"/></b></b>
                                             </div>
                                         </div>
                                         
@@ -134,7 +149,7 @@
                                                 <label>School</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>${user.school}</p>
+                                                <b style = "color:red;"><b><form:input placeholder = "School" path = "school"/></b></b>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -142,7 +157,7 @@
                                                 <label>Class</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>${user.classNumber }</p>
+                                                <b style = "color:red;"><b><form:input placeholder = "Class" path = "classNumber"/></b></b>
                                             </div>
                                         </div>
                             </div>
@@ -197,6 +212,10 @@
                         </div>
                     </div>
                 </div>
+                
+                <div  class ="col-md-4 col-md-offset-4" style = "display:flex;justify-content: center">
+                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Save Profile"/>
+                    </div>
             </form:form>           
         </div>
 

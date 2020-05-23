@@ -46,6 +46,28 @@ public class UserValidator implements Validator  {
         
     }
     
+
+    public String validateForProfileUpdate(Object o) {
+        User user = (User) o;
+        String errors = "";
+        if (user.getUsername().length() < 3 || user.getUsername().length() > 32) {
+            errors += "Size must larger than 3 and smaller than 32 - ";
+        }
+        User us = userService.findByUsername(user.getUsername());
+        if (us != null && us.getId() != user.getId()) {
+            errors += "Username is already taken - ";
+        }
+
+        if (user.getPassword().length() < 3 || user.getPassword().length() > 32) {
+            errors += "Password Should be larger than 3 and smaller than 32 - ";
+        }
+        
+        if (!user.getPasswordConfirm().equals(user.getPassword())) {
+            errors += "Passwords Does not match ! - ";
+        }
+        return errors;
+    }
+    
 }
 
 

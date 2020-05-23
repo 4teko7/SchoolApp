@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teko.commercial.Entities.User;
+import com.teko.commercial.encryption.EncodeDecode;
 import com.teko.commercial.services.UserDetailsServiceImp;
 import com.teko.commercial.validator.UserValidator;
 
@@ -36,8 +37,8 @@ public class UserController {
 
 	@Autowired
 	private UserValidator validator;
-	
-	
+
+	private EncodeDecode encodeDecode = new EncodeDecode();
 	
 	@GetMapping("/registration")
 	public String registerUser(Model theModel) {
@@ -87,8 +88,39 @@ public class UserController {
 			theModel.addAttribute("user",userService.findByUsername(request.getRemoteUser()));
         	return "profile";
         }
+		return "login";
+	
+	}
+	
+	@GetMapping("/updateprofile")
+	public String updateUserProfile(@RequestParam("id") int theId, Model theModel, Authentication authentication,HttpServletRequest request) {
+		if(authentication != null && authentication.isAuthenticated()) {
+			User user = userService.findByUsername(request.getRemoteUser());
+			user.setPassword(encodeDecode.decode(user.getPassword()));
+			user.setPasswordConfirm(encodeDecode.decode(user.getPasswordConfirm()));
+			
+			theModel.addAttribute("user",userService.findByUsername(request.getRemoteUser()));
+        	return "updateprofile";
+        }
 //		theModel.addAttribute("user",new User());
 		return "login";
+	
+	}
+	
+	@PostMapping("/updateprofile")
+	public String updateUserProfilePost(@ModelAttribute("user") User user, @RequestParam("id") int theId,  Model theModel,Authentication authentication,HttpServletRequest request) {
+		if(authentication != null && authentication.isAuthenticated()) {
+			String errors = validator.validateForProfileUpdate(user);
+			if (!errors.equals("")) {
+				theModel.addAttribute("error",errors);
+	            return "updateprofile";
+	        }
+        	
+        }
+		userService.save(user);
+
+		return "redirect:/profile";
+
 	
 	}
 	

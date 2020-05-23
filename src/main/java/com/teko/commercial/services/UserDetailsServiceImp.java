@@ -60,5 +60,5 @@ public class UserDetailsServiceImp implements UserDetailsService {
 	
 	public void deleteUser(int id) {userRepository.deleteById(id);}
 	
-
+	public User findByIdAndUsername(int id, String username) {return userRepository.findByIdAndUsername(id, username);}
 }
