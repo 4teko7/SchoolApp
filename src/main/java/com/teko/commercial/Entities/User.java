@@ -28,28 +28,14 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "email")
-	private String email;
+	@Column(name = "active")
+	private int active;
 	
 	@Column(name="firstname")
 	private String firstname;
 	
 	@Column(name="lastname")
 	private String lastname;
-	
-	@Column(name="phone")
-	private String phone;
-	
-	
-
-	@Column(name="classNumber")
-	private int classNumber;
-	
-	@Column(name="school")
-	private String school;
-	
-	@Column(name = "active")
-	private int active;
 	
 	@Column(name = "username")
 	private String username;
@@ -62,19 +48,34 @@ public class User {
 	private String passwordConfirm;
 	
 	
+	@Column(name = "email")
+	private String email;
+	
+	
+	@Column(name="phone")
+	private String phone;
+	
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
+	@Column(name="classNumber")
+	private int classNumber;
+	
+	@Column(name="school")
+	private String school;
+	
+	@Column(name="photoPath")
+	private String photoPath;
+	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "userRole", joinColumns = @JoinColumn(name = "userId",referencedColumnName = "id"), inverseJoinColumns =  @JoinColumn(name = "roleId",referencedColumnName = "id"))
 //	@JoinColumn(name = "userRole")
 	private List<Role> roles;
+
+	
+	
+
+
+
+
 
 
 
@@ -127,7 +128,28 @@ public class User {
 		this.username = user.getUsername();
 		this.password = user.getPassword();
 		this.passwordConfirm = user.getPasswordConfirm();
+		this.photoPath = user.getPhotoPath();
 		this.roles = user.getRoles();
+		
+	}
+	
+	public User(int id, int active, String firstname, String lastname, String username, String password,
+			String passwordConfirm, String email, String phone, int classNumber, String school, String photoPath,
+			List<Role> roles) {
+		super();
+		this.id = id;
+		this.active = active;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.username = username;
+		this.password = password;
+		this.passwordConfirm = passwordConfirm;
+		this.email = email;
+		this.phone = phone;
+		this.classNumber = classNumber;
+		this.school = school;
+		this.photoPath = photoPath;
+		this.roles = roles;
 	}
 
 	public int getId() {
@@ -218,5 +240,21 @@ public class User {
 	public void setSchool(String school) {
 		this.school = school;
 	}
-	
+	public String getPhotoPath() {
+		return photoPath;
+	}
+
+	public void setPhotoPath(String photoPath) {
+		this.photoPath = photoPath;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
 }

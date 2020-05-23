@@ -24,17 +24,22 @@
 <%if (request.getRemoteUser() != null) {%>
 <div class="container emp-profile">
             <%-- <form method="post"> --%>
-            <form:form action="/updateprofile" modelAttribute="user" method="POST">
+            <form:form action="/updateprofile" modelAttribute="user" method="POST" enctype="multipart/form-data">
             <form:hidden path = "id"/>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-<!--                             <div class="file btn btn-lg btn-primary">
+                        <c:if test="${user.photoPath != null}">
+                            <img src="${user.photoPath}" alt="Profil Photo"/>
+                            </c:if>
+                            <c:if test="${user.photoPath == null}">
+                            <img src="https://via.placeholder.com/300" alt="Profil Photo"/>
+                            </c:if>
+                             <div class="file btn btn-lg btn-primary">
                                 Change Photo
                                 <input type="file" name="file"/>
                                 
-                            </div> -->
+                            </div>
                             
                         </div>
                     </div>
