@@ -21,7 +21,7 @@
 <body>
 
 <!------ Include the above in your HEAD tag ---------->
-
+<%if (request.getRemoteUser() != null) {%>
 <div class="container emp-profile">
             <%-- <form method="post"> --%>
             <form:form action="/updateprofile" modelAttribute="user" method="POST">
@@ -218,6 +218,7 @@
                     </div>
             </form:form>           
         </div>
+<%}%>
 
 </body>
 

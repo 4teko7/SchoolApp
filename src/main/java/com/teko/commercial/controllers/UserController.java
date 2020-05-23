@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teko.commercial.Entities.User;
 import com.teko.commercial.encryption.EncodeDecode;
+import com.teko.commercial.repositories.UserRepository;
 import com.teko.commercial.services.UserDetailsServiceImp;
 import com.teko.commercial.validator.UserValidator;
 
@@ -85,6 +86,7 @@ public class UserController {
 	public String userProfile(Model theModel, Authentication authentication,HttpServletRequest request) {
 		if(authentication != null && authentication.isAuthenticated()) {
 //        	theModel.addAttribute("message","You Logged In Successfully.");
+			if(userService.findByUsername(request.getRemoteUser()) == null) return "redirect:/logout";
 			theModel.addAttribute("user",userService.findByUsername(request.getRemoteUser()));
         	return "profile";
         }
@@ -93,16 +95,15 @@ public class UserController {
 	}
 	
 	@GetMapping("/updateprofile")
-	public String updateUserProfile(@RequestParam("id") int theId, Model theModel, Authentication authentication,HttpServletRequest request) {
+	public String updateUserProfile(Model theModel, Authentication authentication,HttpServletRequest request) {
 		if(authentication != null && authentication.isAuthenticated()) {
 			User user = userService.findByUsername(request.getRemoteUser());
 			user.setPassword(encodeDecode.decode(user.getPassword()));
 			user.setPasswordConfirm(encodeDecode.decode(user.getPasswordConfirm()));
 			
-			theModel.addAttribute("user",userService.findByUsername(request.getRemoteUser()));
+			theModel.addAttribute("user",user);
         	return "updateprofile";
         }
-//		theModel.addAttribute("user",new User());
 		return "login";
 	
 	}
@@ -115,16 +116,18 @@ public class UserController {
 				theModel.addAttribute("error",errors);
 	            return "updateprofile";
 	        }
-        	
+			userService.save(user);
+			
+			return "redirect:/profile";
         }
-		userService.save(user);
-
-		return "redirect:/profile";
+    	return "redirect:/login";
+        
+		
 
 	
 	}
 	
-	
+
 	
 	
 }
