@@ -3,7 +3,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<link href="../../resources/css/home.css" rel="stylesheet" id="bootstrap-css">
     <h1><span class="blue"><span class="yellow">HOME PAGE</pan></h1><hr>
     
 <table class = "container">
@@ -14,12 +14,24 @@
 	<br>  
 </c:if>
 
+<c:url var = "myVideos" value="/secured/myvideos">
+	<c:param name="user" value="${request.getRemoteUser()}" />
+</c:url>
+
+
+
 </table>
 
 <table class="container" >
 
 <div style = "display: flex; justify-content: center;">
 
+<%-- <%if (request.getRemoteUser() == null) {%>
+	 <li>
+	   <a href="#"><i class="ti-user"></i><span> <button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/login' ">Upload Video</button></span></a>
+	 </li>
+<%}%> --%>
+           
 
 <%--
 	CHECKS AUTHENTICATIONS
@@ -45,8 +57,14 @@
 
 </table>
 <div style="clear; both;"></div> 
-
-
+ <a href ="/secured/myvideos">
+<div class="col-md-4">
+        <div class="videoUpload btn btn-lg btn-danger">
+            My Videos
+            
+    </div>
+</div>
+</a>
 
 
 

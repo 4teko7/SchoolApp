@@ -11,6 +11,7 @@
 	<thead>
 	
 		<tr>
+			<th><h1>Image</h1></th>
 			<th><h1>Active</h1></th>
 			<th><h1 style = "margin-right:2rem;">ID</h1></th>
 			<th><h1 style = "margin-right:1rem;">Firstname</h1></th>
@@ -39,7 +40,7 @@
 					
 
 			    	<tr>    
-			    		<td>${user.active}</td>
+			    		<td><img src="/${user.photoPath}" alt="Profil Photo" style="width:10rem; height:10rem;"/></td>
 			             <td>${user.id}</td>  
 			         	 <td>${user.firstname}</td>
 			         	 <td>${user.lastname}</td>  

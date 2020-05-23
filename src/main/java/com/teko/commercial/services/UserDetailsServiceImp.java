@@ -3,6 +3,7 @@ package com.teko.commercial.services;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -19,6 +20,7 @@ import com.teko.commercial.Entities.Role;
 import com.teko.commercial.Entities.User;
 import com.teko.commercial.Entities.UserDetailsImp;
 import com.teko.commercial.Entities.UserRole;
+import com.teko.commercial.Entities.Video;
 import com.teko.commercial.encryption.EncodeDecode;
 import com.teko.commercial.repositories.RoleRepository;
 import com.teko.commercial.repositories.UserRepository;
@@ -36,6 +38,9 @@ public class UserDetailsServiceImp implements UserDetailsService {
 	
 	@Autowired
 	private RoleRepository roleRepo;
+	
+	@Autowired
+	private VideoService videoService;
 	
 	
 	@Autowired
@@ -60,6 +65,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
 		if(entity.getRoles() == null || entity.getRoles().isEmpty()) {
 			entity.setRoles(Arrays.asList(roleRepo.findById(2)));
 		}
+		System.out.println("OUR ENTITY : " + entity);
 		userRepository.save(entity);
 	}
 		
@@ -111,6 +117,31 @@ public class UserDetailsServiceImp implements UserDetailsService {
 				String path = imageUtil.resize(thisUser,fileNameAndPath.toString(),300,300);
 				
 				thisUser.setPhotoPath(path);
+			}
+		}catch(Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+	}
+	
+	
+	public void uploadVideo(User thisUser,MultipartFile file) {
+		try {
+			System.out.println("VIDEO PATH : WILL COME ");
+			final String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/uploads/videos";
+			if(!file.isEmpty()) {
+				String time = System.currentTimeMillis() + "";
+				String extension = file.getOriginalFilename().substring(file.getOriginalFilename().length()-4,file.getOriginalFilename().length());
+				System.out.println("EXTENSION : " + extension);
+				String path = file.getOriginalFilename().substring(0,file.getOriginalFilename().length()-4) +"-"+ thisUser.getUsername() + "-"+time+extension;
+				System.out.println("VIDEO PATH : MIDDLE" + path);
+				Path fileNameAndPath = Paths.get(uploadDir,path);
+				Files.write(fileNameAndPath, file.getBytes());
+				path = "uploads/videos/" + path;
+				if(thisUser.getVideos() == null) thisUser.setVideos(new ArrayList<Video>());
+				Video video = new Video(file.getOriginalFilename(),file.getContentType(),extension,path,thisUser);
+				thisUser.getVideos().add(video);
+				videoService.save(video);
+				System.out.println("AFTER SAVE VIDEO INTO Video " + video);
 			}
 		}catch(Exception e) {
 			System.out.println(e.getStackTrace());

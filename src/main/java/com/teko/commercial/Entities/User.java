@@ -73,6 +73,11 @@ public class User {
 	private List<Role> roles;
 
 	
+	@OneToMany(mappedBy="user", fetch = FetchType.LAZY)    
+	private List<Video> videos;
+	
+	
+	
 	
 
 
@@ -80,6 +85,16 @@ public class User {
 
 
 
+
+	
+
+	public List<Video> getVideos() {
+		return videos;
+	}
+
+	public void setVideos(List<Video> videos) {
+		this.videos = videos;
+	}
 
 	public User(int id, String email, String firstname, String lastname, String phone, String classNumber, String school,
 		int active, String username, String password, String passwordConfirm, List<Role> roles) {
@@ -114,6 +129,27 @@ public class User {
 		this.roles = roles;
 	}
 
+	public User(int id, int active, String firstname, String lastname, String username, String password,
+			String passwordConfirm, String email, String phone, String classNumber, String school, String photoPath,
+			List<Role> roles, List<Video> videos) {
+		super();
+		this.id = id;
+		this.active = active;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.username = username;
+		this.password = password;
+		this.passwordConfirm = passwordConfirm;
+		this.email = email;
+		this.phone = phone;
+		this.classNumber = classNumber;
+		this.school = school;
+		this.photoPath = photoPath;
+		this.roles = roles;
+		this.videos = videos;
+	}
+	
+	
 	public User() {
 		super();
 	}
@@ -132,6 +168,7 @@ public class User {
 		this.passwordConfirm = user.getPasswordConfirm();
 		this.photoPath = user.getPhotoPath();
 		this.roles = user.getRoles();
+		this.videos = user.getVideos();
 		
 	}
 	
@@ -258,13 +295,17 @@ public class User {
 		this.password = password;
 	}
 
-
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", active=" + active + ", firstname=" + firstname + ", lastname=" + lastname
 				+ ", username=" + username + ", password=" + password + ", passwordConfirm=" + passwordConfirm
 				+ ", email=" + email + ", phone=" + phone + ", classNumber=" + classNumber + ", school=" + school
-				+ ", photoPath=" + photoPath + ", roles=" + roles + "]";
+				+ ", photoPath=" + photoPath + ", roles=" + roles + ", videos=" + videos + "]";
 	}
+
+
+
+
+
 	
 }

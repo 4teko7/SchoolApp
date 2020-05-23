@@ -29,6 +29,7 @@ import com.teko.commercial.Entities.User;
 import com.teko.commercial.encryption.EncodeDecode;
 import com.teko.commercial.repositories.UserRepository;
 import com.teko.commercial.services.UserDetailsServiceImp;
+import com.teko.commercial.services.VideoService;
 import com.teko.commercial.util.ImageUtil;
 import com.teko.commercial.validator.UserValidator;
 
@@ -52,6 +53,9 @@ public class UserController {
 	@Autowired
 	private UserDetailsServiceImp userService;
 
+	@Autowired
+	private VideoService videoService;
+	
 	@Autowired
 	private UserValidator validator;
 

@@ -19,15 +19,19 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.teko.commercial.Entities.Role;
 import com.teko.commercial.Entities.User;
+import com.teko.commercial.Entities.Video;
 import com.teko.commercial.encryption.EncodeDecode;
 import com.teko.commercial.repositories.RoleRepository;
 import com.teko.commercial.services.UserDetailsServiceImp;
+import com.teko.commercial.services.VideoService;
 import com.teko.commercial.utils.CheckRoles;
 import com.teko.commercial.validator.UserValidator;
 
@@ -37,6 +41,9 @@ public class SecuredController {
 
 	@Autowired
 	private UserDetailsServiceImp userService;
+	
+	@Autowired
+	private VideoService videoService;
 	
 	@Autowired
 	private RoleRepository roleRepository;
@@ -136,6 +143,44 @@ public class SecuredController {
 
 		return "redirect:/secured/users";
 	}
+	
+	
+	@RequestMapping(value="myvideos", method = RequestMethod.GET)
+	public String myvideos(Model theModel,HttpServletRequest request) {
+		
+		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
+		User thisUser = userService.findByUsername(request.getRemoteUser());
+		List<Video> videos = videoService.findByUser(thisUser);
+		System.out.println("VIDEOS : " + videos);
+		theModel.addAttribute("videos",videos);
+		
+		
+		return "myvideos";
+	}
+	
+	@PostMapping("/uploadvideo")
+	public String uploadVideo(@RequestParam("file") MultipartFile file,Model theModel,Authentication authentication,HttpServletRequest request) {
+		if(authentication != null && authentication.isAuthenticated()) {
+//			System.out.println(userService.findByUsername(request.getRemoteUser()));
+			
+			User thisUser = userService.findByUsername(request.getRemoteUser());
+			userService.uploadVideo(thisUser, file);
+			userService.save(thisUser);
+			
+			theModel.addAttribute("message","Successfully Uploaded.");
+			List<Video> videos = videoService.findByUser(thisUser);
+			System.out.println("VIDEOS : " + videos);
+			theModel.addAttribute("videos",videos);
+			return "myvideos";
+        }
+//		
+    	return "redirect:/secured/myvideos";
+
+	}
+	
+	
+	
+	
 	
 	
 }

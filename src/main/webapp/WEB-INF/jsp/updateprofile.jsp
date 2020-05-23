@@ -38,7 +38,6 @@
                             <div class="fileRemove btn btn-lg btn-danger">
                                 Remove Photo
                                 <input type="submit" name="removePhoto" />
-                                
                             </div>
                              <div class="file btn btn-lg btn-primary">
                                 Change Photo
