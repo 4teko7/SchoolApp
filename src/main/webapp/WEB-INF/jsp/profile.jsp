@@ -29,12 +29,15 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="${user.photoPath }" alt="Profil Photo"/>
-<!--                             <div class="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file"/>
-                                
-                            </div> -->
+                           	   <c:if test="${user.photoPath != null}">
+                            		<img src="${user.photoPath}" alt="Profil Photo"/>
+                           		</c:if>
+	                            <c:if test="${user.photoPath == null}">
+	                            	<img src="https://via.placeholder.com/300" alt="Profil Photo"/>
+	                            </c:if>
+                             <div class="file btn btn-lg btn-primary">
+                                Add a Photo at Edit Profile Section
+                            </div>
                             
                         </div>
                     </div>
