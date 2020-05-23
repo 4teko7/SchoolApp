@@ -57,22 +57,58 @@
   <source src="${video.path }" type="${video.mimeType }">
    <source src="mov_bbb.ogg" type="video/ogg">
 </video>  -->
-
+<div class="wrapper">
+<h2><strong>Izlemek Icin Cift Tiklayin<span>( 4 )</span></strong></h2>
+<div class="cards">
 <c:forEach items="${videos}" var="video">
   <div class="card">
-  <video width="300" height="300" controls style=" margin-left: auto; margin-right: auto; display: block; width:100%">
+  
+  <video  controls style=" width:100%;height:100%;margin-left: auto; margin-right: auto; display: block; width:100%">
     <source src="/${video.path}" type="${video.mimeType }">
     
 </video>
-  <div class="container">
-    <h4><b>${video.originalName}</b></h4>
-    <p>Architect & Engineer</p>
-  </div>
+
+
+</div> 
+  <div class="card">
+  
+  <video  controls style=" width:100%;height:100%;margin-left: auto; margin-right: auto; display: block; width:100%">
+    <source src="/${video.path}" type="${video.mimeType }">
+    
+</video>
+
+
 </div> 
 
-
 </c:forEach>
+</div>
+<h2><strong>What's new?</strong></h2>
 
+	
+
+	
+<c:forEach items="${videos}" var="video">
+
+
+	<div class="news">
+
+
+		<figure class="article">
+
+			<video width="300" height="300" controls style=" margin-left: auto; margin-right: auto; display: block; width:100%">
+    <source src="/${video.path}" type="${video.mimeType }">
+    
+</video>
+
+			
+
+		</figure>
+
+		
+	</div>
+	</c:forEach>
+
+</div>
 
 
 
