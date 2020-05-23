@@ -124,7 +124,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
 	}
 	
 	
-	public void uploadVideo(User thisUser,MultipartFile file) {
+	public Video uploadVideo(User thisUser,MultipartFile file) {
 		try {
 			System.out.println("VIDEO PATH : WILL COME ");
 			final String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/uploads/videos";
@@ -132,7 +132,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
 				String time = System.currentTimeMillis() + "";
 				String extension = file.getOriginalFilename().substring(file.getOriginalFilename().length()-4,file.getOriginalFilename().length());
 				System.out.println("EXTENSION : " + extension);
-				String path = file.getOriginalFilename().substring(0,file.getOriginalFilename().length()-4) +"-"+ thisUser.getUsername() + "-"+time+extension;
+				String path = thisUser.getUsername() + "-"+time+extension;
 				System.out.println("VIDEO PATH : MIDDLE" + path);
 				Path fileNameAndPath = Paths.get(uploadDir,path);
 				Files.write(fileNameAndPath, file.getBytes());
@@ -140,11 +140,13 @@ public class UserDetailsServiceImp implements UserDetailsService {
 				if(thisUser.getVideos() == null) thisUser.setVideos(new ArrayList<Video>());
 				Video video = new Video(file.getOriginalFilename(),file.getContentType(),extension,path,thisUser);
 				thisUser.getVideos().add(video);
-				videoService.save(video);
-				System.out.println("AFTER SAVE VIDEO INTO Video " + video);
+				return video;
+//				videoService.save(video);
 			}
 		}catch(Exception e) {
 			System.out.println(e.getStackTrace());
+			
 		}
+		return new Video();
 	}
 }

@@ -23,8 +23,8 @@ public class Video {
    @GeneratedValue(strategy=GenerationType.IDENTITY)
    private int id;
 
-   @Column(name = "originalName")
-   private String originalName;
+   @Column(name = "name")
+   private String name;
    
    @Column(name = "mimeType")
    private String mimeType;
@@ -35,12 +35,42 @@ public class Video {
    @Column(name = "path")
    private String path;
    
+   @Column(name = "videoContent")
+   private String videoContent;
+   
+   @Column(name = "videoSubject")
+   private String videoSubject;
+   
   
    
 
 
 
-   @ManyToOne(fetch = FetchType.EAGER)
+   public String getName() {
+	return name;
+}
+
+public void setName(String name) {
+	this.name = name;
+}
+
+public String getVideoContent() {
+	return videoContent;
+}
+
+public void setVideoContent(String videoContent) {
+	this.videoContent = videoContent;
+}
+
+public String getVideoSubject() {
+	return videoSubject;
+}
+
+public void setVideoSubject(String videoSubject) {
+	this.videoSubject = videoSubject;
+}
+
+@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId")
 	private User user;
    
@@ -48,7 +78,7 @@ public class Video {
    
    	public Video(String name, String mimeType, String extension, String path, User user) {
 	super();
-	this.originalName = name;
+	this.name = name;
 	this.mimeType = mimeType;
 	this.extension = extension;
 	this.path = path;
@@ -58,7 +88,7 @@ public class Video {
 	public Video(int id, String name, String mimeType, String extension, String path, User user) {
 	super();
 	this.id = id;
-	this.originalName = name;
+	this.name = name;
 	this.mimeType = mimeType;
 	this.extension = extension;
 	this.path = path;
@@ -66,6 +96,21 @@ public class Video {
 	
 }
 
+
+
+
+	public Video(int id, String name, String mimeType, String extension, String path, String videoContent,
+			String videoSubject, User user) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.mimeType = mimeType;
+		this.extension = extension;
+		this.path = path;
+		this.videoContent = videoContent;
+		this.videoSubject = videoSubject;
+		this.user = user;
+	}
 
 	public int getId() {
 	return id;
@@ -77,13 +122,13 @@ public void setId(int id) {
 }
 
 
-public String getOriginalName() {
-	return originalName;
+public String getname() {
+	return name;
 }
 
 
-public void setOriginalName(String name) {
-	this.originalName = name;
+public void setname(String name) {
+	this.name = name;
 }
 
 
@@ -126,7 +171,11 @@ public void setPath(String path) {
 }
    
    
-   
+@Override
+public String toString() {
+	return "Video [id=" + id + ", name=" + name + ", mimeType=" + mimeType + ", extension=" + extension + ", path="
+			+ path + ", videoContent=" + videoContent + ", videoSubject=" + videoSubject + ", user=" + user + "]";
+}
 	   
 //	   @Column("length")
 //	   private Long contetLen;

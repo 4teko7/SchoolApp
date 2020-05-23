@@ -63,11 +63,20 @@
             My Videos
             
     </div>
+    
 </div>
 </a>
 
 
-
+ <a href ="/secured/addvideopage">
+<div class="col-md-4">
+        <div class="videoUpload btn btn-lg btn-danger">
+            Add Video
+            
+    </div>
+    
+</div>
+</a>
 
 
 

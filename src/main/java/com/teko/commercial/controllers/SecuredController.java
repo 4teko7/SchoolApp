@@ -164,7 +164,7 @@ public class SecuredController {
 //			System.out.println(userService.findByUsername(request.getRemoteUser()));
 			
 			User thisUser = userService.findByUsername(request.getRemoteUser());
-			userService.uploadVideo(thisUser, file);
+			Video video = userService.uploadVideo(thisUser, file);
 			userService.save(thisUser);
 			
 			theModel.addAttribute("message","Successfully Uploaded.");
@@ -178,6 +178,16 @@ public class SecuredController {
 
 	}
 	
+	
+	@RequestMapping(value="addvideopage", method = RequestMethod.GET)
+	public String addvideoPage(Model theModel,HttpServletRequest request) {
+		
+		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
+		
+		theModel.addAttribute("video",new Video());
+		
+		return "uploadvideo";
+	}
 	
 	
 	

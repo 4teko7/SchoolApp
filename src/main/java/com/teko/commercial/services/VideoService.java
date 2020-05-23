@@ -23,5 +23,5 @@ public class VideoService {
 	
 	public List<Video> findByExtension(String extension){return videoRepo.findByExtension(extension);}
 	
-	public List<Video> findByName(String name){return videoRepo.findByOriginalName(name);}
+	public List<Video> findByName(String name){return videoRepo.findByName(name);}
 }
