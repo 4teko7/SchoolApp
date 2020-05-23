@@ -34,10 +34,11 @@
                            		</c:if>
 	                            <c:if test="${user.photoPath == null}">
 	                            	<img src="https://via.placeholder.com/300" alt="Profil Photo"/>
+	                            	<div class="file btn btn-lg btn-primary">
+                                		 Add a Photo at Edit Profile Section
+                            		</div>
 	                            </c:if>
-                             <div class="file btn btn-lg btn-primary">
-                                Add a Photo at Edit Profile Section
-                            </div>
+                             
                             
                         </div>
                     </div>

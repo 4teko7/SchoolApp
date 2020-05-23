@@ -29,6 +29,7 @@ import com.teko.commercial.encryption.EncodeDecode;
 import com.teko.commercial.repositories.RoleRepository;
 import com.teko.commercial.services.UserDetailsServiceImp;
 import com.teko.commercial.utils.CheckRoles;
+import com.teko.commercial.validator.UserValidator;
 
 @RequestMapping("/secured")
 @Controller
@@ -39,6 +40,9 @@ public class SecuredController {
 	
 	@Autowired
 	private RoleRepository roleRepository;
+	
+	@Autowired
+	private UserValidator validator;
 	
 	private EncodeDecode encodeDecode = new EncodeDecode();
 //	private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -70,7 +74,6 @@ public class SecuredController {
 //	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="adduser", method = RequestMethod.POST)
 	public String addUser(HttpServletRequest request, @ModelAttribute("user") User user) {
-		
 		if(request.getParameter("makeAdmin") != null) {
 			Role role = new Role();
 			role.setid(1);
@@ -97,7 +100,7 @@ public class SecuredController {
 	
 //	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="updateuser", method = RequestMethod.GET)
-	public String updateUser(@RequestParam("id") int theId,Model theModel) {
+	public String updateUserGet(@RequestParam("id") int theId,Model theModel) {
 		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
 		User user = userService.findById(theId);
 //		user.setRoles(roles);
@@ -105,6 +108,34 @@ public class SecuredController {
 		user.setPasswordConfirm(encodeDecode.decode(user.getPasswordConfirm()));
 		theModel.addAttribute("user",user);
 		return "updateUser";
+	}
+	
+	@RequestMapping(value="updateuser", method = RequestMethod.POST)
+	public String updateUserPost(HttpServletRequest request, @ModelAttribute("user") User user,Model theModel,Authentication authentication) {
+		
+		
+		if(authentication != null && authentication.isAuthenticated()) {
+			User thisUser = userService.findById(user.getId());
+			String errors = validator.validateForProfileUpdate(user);
+			if (!errors.equals("")) {
+				userService.updateUser(thisUser, user);
+				
+				theModel.addAttribute("user",thisUser);
+				theModel.addAttribute("error",errors);
+	            return "updateprofile";
+	        }else {
+			
+				userService.updateUser(thisUser,user);
+				userService.save(thisUser);
+	        }
+			
+		}
+		
+		
+		
+		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
+
+		return "users";
 	}
 	
 	

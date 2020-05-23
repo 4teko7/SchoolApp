@@ -42,7 +42,7 @@ import com.teko.commercial.validator.UserValidator;
 @Controller
 public class UserController {
 //  /commercial/src/main/java/com/teko/commercial/controllers/UserController.java
-	final String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/uploads";
+	
 //	final String path = System.getProperty("user.dir") + "/uploads";
 //	/commercial/src/main/resources/static
 //	Path path = FileSystems.getDefault().getPath("/commercial/src/main/resources/static/uploads").toAbsolutePath();
@@ -72,6 +72,7 @@ public class UserController {
 		if (bindingResult.hasErrors()) {
             return "registration";
         }
+		
 		userService.save(user);
 		
 		return "redirect:/home";
@@ -79,7 +80,6 @@ public class UserController {
 	
 	@GetMapping("/login")
 	public String loginUser(Model theModel, String error, String logout,Authentication authentication) {
-		System.out.println(uploadDir);
 		if (error != null)
             theModel.addAttribute("error", "Your username and password is invalid.");
 
@@ -97,7 +97,6 @@ public class UserController {
 	@PostMapping("/login")
 	public String loginUser(@ModelAttribute("user") User user,Authentication authentication) {
 //		if(authentication.isAuthenticated()) return "home";
-		System.out.println("asdasd");
 		
 		return "login";
 	}
@@ -106,8 +105,9 @@ public class UserController {
 	public String userProfile(Model theModel, Authentication authentication,HttpServletRequest request) {
 		if(authentication != null && authentication.isAuthenticated()) {
 //        	theModel.addAttribute("message","You Logged In Successfully.");
-			if(userService.findByUsername(request.getRemoteUser()) == null) return "redirect:/logout";
-			theModel.addAttribute("user",userService.findByUsername(request.getRemoteUser()));
+			User user = userService.findByUsername(request.getRemoteUser());
+			if(user == null) return "redirect:/logout";
+			theModel.addAttribute("user",user);
         	return "profile";
         }
 		return "login";
@@ -133,43 +133,20 @@ public class UserController {
 		if(authentication != null && authentication.isAuthenticated()) {
 			User thisUser = userService.findById(user.getId());
 			String errors = validator.validateForProfileUpdate(user);
+			userService.uploadUserImage(thisUser, user, file, request);
+			userService.save(thisUser);
+			userService.updateUser(thisUser, user);
 			if (!errors.equals("")) {
-				thisUser.setPassword(encodeDecode.decode(thisUser.getPassword()));
-				thisUser.setPasswordConfirm(encodeDecode.decode(thisUser.getPasswordConfirm()));
-				
 				theModel.addAttribute("user",thisUser);
 				theModel.addAttribute("error",errors);
 	            return "updateprofile";
 	        }
-			
-			
-			
-			try {
-				if(!file.isEmpty()) {
-//					System.out.println(path.toAbsolutePath().toString());
-					String time = new Date().getTime() + "";
-					Path fileNameAndPath = Paths.get(uploadDir,file.getOriginalFilename().substring(0,file.getOriginalFilename().length()-4) +"-"+ request.getRemoteUser() + "-"+time+".png");
-//					String fileNameAndPath = path.toString() + "/" + file.getOriginalFilename();
-					Files.write(fileNameAndPath, file.getBytes());
-					String path = imageUtil.resize(request,fileNameAndPath.toString(),300,300);
-					user.setPhotoPath(path);
-				}else {
-					user.setPhotoPath(thisUser.getPhotoPath());
-					user.setRoles(thisUser.getRoles());
-				}
-				
-				userService.save(user);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-			
-			
-			
+	        
+			userService.save(thisUser);
+	   
 			return "redirect:/profile";
         }
+		
     	return "redirect:/login";
 
 	}

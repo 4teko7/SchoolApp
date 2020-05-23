@@ -35,7 +35,7 @@
     </div> --%>
     
     <div class="container">
-			<form:form action="/secured/adduser" modelAttribute="user" method="POST"  class="form-signin">
+			<form:form action="/secured/updateuser" modelAttribute="user" method="POST"  class="form-signin">
 			<h2 class="form-heading"><scan style = "font-size:3rem;"><b>Update User</b></scan></h2>
 	  			<form:hidden path="id" />
 	  			<%-- 

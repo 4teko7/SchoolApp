@@ -24,6 +24,8 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "user", uniqueConstraints = @UniqueConstraint (columnNames = "username"))
 public class User {
 
+	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -57,7 +59,7 @@ public class User {
 	
 
 	@Column(name="classNumber")
-	private int classNumber;
+	private String classNumber;
 	
 	@Column(name="school")
 	private String school;
@@ -79,7 +81,7 @@ public class User {
 
 
 
-	public User(int id, String email, String firstname, String lastname, String phone, int classNumber, String school,
+	public User(int id, String email, String firstname, String lastname, String phone, String classNumber, String school,
 		int active, String username, String password, String passwordConfirm, List<Role> roles) {
 		super();
 		this.id = id;
@@ -96,7 +98,7 @@ public class User {
 		this.roles = roles;
 	}
 
-	public User(String email, String firstname, String lastname, String phone, int classNumber, String school,
+	public User(String email, String firstname, String lastname, String phone, String classNumber, String school,
 			int active, String username, String password, String passwordConfirm, List<Role> roles) {
 		super();
 		this.email = email;
@@ -134,7 +136,7 @@ public class User {
 	}
 	
 	public User(int id, int active, String firstname, String lastname, String username, String password,
-			String passwordConfirm, String email, String phone, int classNumber, String school, String photoPath,
+			String passwordConfirm, String email, String phone, String classNumber, String school, String photoPath,
 			List<Role> roles) {
 		super();
 		this.id = id;
@@ -225,11 +227,11 @@ public class User {
 		this.phone = phone;
 	}
 
-	public int getClassNumber() {
+	public String getClassNumber() {
 		return classNumber;
 	}
 
-	public void setClassNumber(int classNumber) {
+	public void setClassNumber(String classNumber) {
 		this.classNumber = classNumber;
 	}
 
@@ -257,4 +259,12 @@ public class User {
 	}
 
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", active=" + active + ", firstname=" + firstname + ", lastname=" + lastname
+				+ ", username=" + username + ", password=" + password + ", passwordConfirm=" + passwordConfirm
+				+ ", email=" + email + ", phone=" + phone + ", classNumber=" + classNumber + ", school=" + school
+				+ ", photoPath=" + photoPath + ", roles=" + roles + "]";
+	}
+	
 }

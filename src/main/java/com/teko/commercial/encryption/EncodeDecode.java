@@ -35,6 +35,7 @@ public class EncodeDecode extends BCryptPasswordEncoder {
 		}
 	public void setEncodeDecode(AES256TextEncryptor encodeDecode) {
 		this.encodeDecode = encodeDecode;
+		
 	}
 
 	

@@ -1,12 +1,19 @@
 package com.teko.commercial.services;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.teko.commercial.Entities.Role;
 import com.teko.commercial.Entities.User;
@@ -16,6 +23,7 @@ import com.teko.commercial.encryption.EncodeDecode;
 import com.teko.commercial.repositories.RoleRepository;
 import com.teko.commercial.repositories.UserRepository;
 import com.teko.commercial.repositories.UserRoleRepository;
+import com.teko.commercial.util.ImageUtil;
 
 @Service
 public class UserDetailsServiceImp implements UserDetailsService {
@@ -33,6 +41,8 @@ public class UserDetailsServiceImp implements UserDetailsService {
 	@Autowired
 	private UserRoleService userRoleService;
 	
+	private ImageUtil imageUtil = new ImageUtil();
+	
 //	private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
 	private EncodeDecode encodeDecode = new EncodeDecode();
@@ -42,12 +52,13 @@ public class UserDetailsServiceImp implements UserDetailsService {
 	
 	public void save(User entity) {
 		entity.setActive(1);
-		entity.setPassword(encodeDecode.encode(entity.getPassword()));
-		entity.setPasswordConfirm(encodeDecode.encode(entity.getPasswordConfirm()));
+		if(entity.getPassword().equals(entity.getPasswordConfirm())) {
+			entity.setPassword(encodeDecode.encode(entity.getPassword()));
+			entity.setPasswordConfirm(encodeDecode.encode(entity.getPasswordConfirm()));
+		}
+			
 		if(entity.getRoles() == null || entity.getRoles().isEmpty()) {
-			List<UserRole> userRoles = userRoleRepo.findByuserId(entity.getId());
-			if(userRoles.isEmpty()) entity.setRoles(Arrays.asList(roleRepo.findById(2)));
-			else entity.setRoles(userRoleService.getAllRolesFromList(userRoles));
+			entity.setRoles(Arrays.asList(roleRepo.findById(2)));
 		}
 		userRepository.save(entity);
 	}
@@ -61,4 +72,50 @@ public class UserDetailsServiceImp implements UserDetailsService {
 	public void deleteUser(int id) {userRepository.deleteById(id);}
 	
 	public User findByIdAndUsername(int id, String username) {return userRepository.findByIdAndUsername(id, username);}
+	
+	public void updateUser(User original, User created) {
+		if(created.getFirstname() != null)
+			original.setFirstname(created.getFirstname());
+		if(created.getLastname() != null)
+			original.setLastname(created.getLastname());
+		if(created.getUsername() != null)
+			original.setUsername(created.getUsername());
+		if(created.getPassword() != null)
+			original.setPassword(created.getPassword());
+		if(created.getPasswordConfirm() != null)
+			original.setPasswordConfirm(created.getPasswordConfirm());
+		if(created.getEmail() != null)
+			original.setEmail(created.getEmail());
+		if(created.getPhone() != null)
+			original.setPhone(created.getPhone());
+		if(created.getSchool() != null)
+			original.setSchool(created.getSchool());
+		if(created.getClassNumber() != null)
+			original.setClassNumber(created.getClassNumber());
+		if(created.getPhotoPath() != null)
+			original.setPhotoPath(created.getPhotoPath());
+		if(created.getRoles() != null && !created.getRoles().isEmpty())
+			original.setRoles(created.getRoles());	
+	}
+	
+	
+	public void uploadUserImage(User thisUser,User user,MultipartFile file,HttpServletRequest request) {
+		try {
+			final String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/uploads";
+			if(!file.isEmpty()) {
+	//			System.out.println(path.toAbsolutePath().toString());
+				String time = System.currentTimeMillis() + "";
+				Path fileNameAndPath = Paths.get(uploadDir,file.getOriginalFilename().substring(0,file.getOriginalFilename().length()-4) +"-"+ request.getRemoteUser() + "-"+time+".png");
+	//			String fileNameAndPath = path.toString() + "/" + file.getOriginalFilename();
+				Files.write(fileNameAndPath, file.getBytes());
+				String path = imageUtil.resize(request,fileNameAndPath.toString(),300,300);
+				user.setPhotoPath(path);
+				thisUser.setPhotoPath(path);
+			}else {
+				user.setPhotoPath(thisUser.getPhotoPath());
+			}
+		}catch(Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+	}
 }

@@ -37,7 +37,7 @@
                             </c:if>
                              <div class="file btn btn-lg btn-primary">
                                 Change Photo
-                                <input type="file" name="file"/>
+                                <input type="file" name="file" />
                                 
                             </div>
                             
@@ -162,7 +162,7 @@
                                                 <label>Class</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <b style = "color:red;"><b><form:input placeholder = "Class" path = "classNumber"/></b></b>
+                                                <b style = "color:red;"><b><form:input id = "classNumber" placeholder = "Class" path = "classNumber"/></b></b>
                                             </div>
                                         </div>
                             </div>
@@ -226,6 +226,16 @@
 <%}%>
 
 </body>
+
+<script type="text/javascript">
+
+function setFields() {  
+  
+              
+}  
+</script>  
+
+</script>
 
 </html>
 
