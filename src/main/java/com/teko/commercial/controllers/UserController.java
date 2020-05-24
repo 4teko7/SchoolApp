@@ -1,5 +1,6 @@
 package com.teko.commercial.controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -48,13 +49,8 @@ import com.teko.commercial.validator.UserValidator;
 @RequestMapping("/")
 @Controller
 public class UserController {
-//  /commercial/src/main/java/com/teko/commercial/controllers/UserController.java
-	
-//	final String path = System.getProperty("user.dir") + "/uploads";
-//	/commercial/src/main/resources/static
-//	Path path = FileSystems.getDefault().getPath("/commercial/src/main/resources/static/uploads").toAbsolutePath();
-	
-//	uploadDir = path;
+
+	final String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static";
 	
 	@Autowired
 	private UserDetailsServiceImp userService;
@@ -153,7 +149,19 @@ public class UserController {
 		if(authentication != null && authentication.isAuthenticated()) {
 			User thisUser = userService.findById(user.getId());
 			String errors = validator.validateForProfileUpdate(user);
-			if(request.getParameter("removePhoto") != null) {thisUser.setPhotoPath(null); user.setPhotoPath(null);}
+			if(request.getParameter("removePhoto") != null) {
+				try{
+					File input = new File(uploadDir+"/"+thisUser.getPhotoPath());
+		            if(input.delete()){
+		                System.out.println(input.getName() + " is deleted!");
+		            }else{
+		                System.out.println("Delete operation is failed.");
+		            }
+		        }catch(Exception e){
+		            System.out.println("ERROR : " + e.getStackTrace());
+		        }
+				thisUser.setPhotoPath(null); user.setPhotoPath(null);
+				}
 			else userService.uploadUserImage(thisUser, file);
 			
 			userService.save(thisUser);

@@ -1,5 +1,6 @@
 package com.teko.commercial.services;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -107,16 +108,34 @@ public class UserDetailsServiceImp implements UserDetailsService {
 	
 	public void uploadUserImage(User thisUser,MultipartFile file) {
 		try {
-			final String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/uploads";
+			final String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static";
 			if(!file.isEmpty()) {
 	//			System.out.println(path.toAbsolutePath().toString());
 				String time = System.currentTimeMillis() + "";
-				Path fileNameAndPath = Paths.get(uploadDir,file.getOriginalFilename().substring(0,file.getOriginalFilename().length()-4) +"-"+ thisUser.getUsername() + "-"+time+".png");
+				Path fileNameAndPath = Paths.get(uploadDir+"/uploads"+file.getOriginalFilename().substring(0,file.getOriginalFilename().length()-4) +"-"+ thisUser.getUsername() + "-"+time+".png");
 	//			String fileNameAndPath = path.toString() + "/" + file.getOriginalFilename();
 				Files.write(fileNameAndPath, file.getBytes());
 				String path = imageUtil.resize(thisUser,fileNameAndPath.toString(),300,300);
 				
+				
+				try{
+					File input = new File(uploadDir+"/"+thisUser.getPhotoPath());
+		            if(input.delete()){
+		                System.out.println(input.getName() + " is deleted!");
+		            }else{
+		                System.out.println("Delete operation is failed.");
+		            }
+		        }catch(Exception e){
+		            System.out.println("ERROR : " + e.getStackTrace());
+		        }
+				
+				
 				thisUser.setPhotoPath(path);
+				
+				
+				
+				
+				
 			}
 		}catch(Exception e) {
 			System.out.println(e.getStackTrace());

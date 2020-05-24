@@ -36,7 +36,17 @@ public class ImageUtil {
         File output = new File(outPath);
         
 		ImageIO.write(resized, "png", output);
-			
+		
+		try{
+            if(input.delete()){
+                System.out.println(input.getName() + " is deleted!");
+            }else{
+                System.out.println("Delete operation is failed.");
+            }
+        }catch(Exception e){
+            System.out.println("ERROR : " + e.getStackTrace());
+        }
+		
 		return "uploads/teko-resized-"+height + "x" + width +"-" + time + ".png";
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
