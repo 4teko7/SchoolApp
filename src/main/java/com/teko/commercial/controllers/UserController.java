@@ -162,12 +162,16 @@ public class UserController {
 			else {
 				
 				if(request.getParameter("imgDersProgramiRadio") != null && request.getParameter("nameOfProfileImg") != null) {
+					System.out.println("original name of profile img : " + files[0]);
+					System.out.println("original name of lectures : " + files[1]);
 					userService.uploadUserImage(thisUser, files[0]);
 					
 					userService.uploadUserLectureImage(thisUser, files[1]);
 				}else if(request.getParameter("nameOfProfileImg") != null) {
+					System.out.println("original name of profile img : " + files[0]);
 					userService.uploadUserImage(thisUser, files[0]);
 				}else if(request.getParameter("imgDersProgramiRadio") != null) {
+					System.out.println("original name of lectures : " + files[1]);
 					userService.uploadUserLectureImage(thisUser, files[1]);
 				}
 			}

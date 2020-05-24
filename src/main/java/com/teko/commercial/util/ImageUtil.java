@@ -35,7 +35,8 @@ public class ImageUtil {
         if(folder == "uploads")
         	uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/uploads";
         
-        String outPath = uploadDir + "/" + thisUser.getUsername()+"-resized-"+height + "x" + width +"-" + time + ".png";;
+        String outPath = uploadDir + "/" + thisUser.getUsername()+"-resized-"+height + "x" + width +"-" + time + ".png";
+        System.out.println("OUT PATH OF RESIZE METHOD : " + outPath);
         File output = new File(outPath);
         
 		ImageIO.write(resized, "png", output);

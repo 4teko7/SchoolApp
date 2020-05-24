@@ -122,7 +122,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
 	//			String fileNameAndPath = path.toString() + "/" + file.getOriginalFilename();
 				Files.write(fileNameAndPath, file.getBytes());
 				path = imageUtil.resize(thisUser,fileNameAndPath.toString(),300,300,folder);
-				
+				System.out.println("Path In upload Image Method : " + path);
 				fileUtils.removeFileFromStorage(fileNameAndPath.toString());
 				
 				
@@ -142,6 +142,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
 		if(thisUser.getPhotoPath() != null)
 			fileUtils.removeFileFromStorage(uploadDir+"/"+thisUser.getPhotoPath());
 		thisUser.setPhotoPath("uploads/"+uploadImage(thisUser,file,"uploads"));
+		System.out.println("Profile Photo Path Of User UploadUserImage: " + thisUser.getPhotoPath());
 	}
 	
 	public void uploadUserLectureImage(User thisUser, MultipartFile file) {
