@@ -36,7 +36,7 @@
                     <div class="col-md-4">
                         <div class="profile-img">
                              <div class="videoUpload btn btn-lg btn-primary">
-                                Choose Photo
+                                Choose Video
                                 <input id = "imgInput" type="file" name="file" />
                             </div>
                         </div>
@@ -47,9 +47,9 @@
                  <!-- END OF Video Upload -->
                  
                   <br>
-                  <form:input name="name" path = "name" type="text" class="form-control" placeholder="Name Of Video"/> 
-                  <form:input name="videoContent" path = "videoContent" type="text" class="form-control" placeholder="Content Of Video"/> 
-                  <form:input name="videoSubject" path = "videoSubject" type="text" class="form-control" placeholder="Subject Of Video"/> 
+                  <form:input name="name" path = "name" type="text" class="form-control" placeholder="Name Of Video"/> <br>
+                  <form:input name="videoSubject" path = "videoSubject" type="text" class="form-control" placeholder="Subject Of Video"/> <br>
+                  <form:textarea name="videoContent" path = "videoContent" class="form-control" placeholder="Content Of Video" rows="5" cols="30" /><br>
                   
                    
                   

@@ -9,6 +9,7 @@ import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -79,13 +80,20 @@ public class UserController {
 	}
 	
 	@PostMapping("/registration")
-	public String registerUser(@ModelAttribute("user") User user, BindingResult bindingResult) {
+	public String registerUser(@ModelAttribute("user") User user, BindingResult bindingResult,HttpServletRequest request) {
 		validator.validate(user, bindingResult);
 		if (bindingResult.hasErrors()) {
             return "registration";
         }
 		
+		
 		userService.save(user);
+		
+		try {
+			request.login(user.getUsername(), encodeDecode.decode(user.getPassword()));
+		} catch (ServletException e) {
+			System.out.println(e.getStackTrace());
+		}
 		
 		return "redirect:/home";
 	}

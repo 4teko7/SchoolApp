@@ -31,8 +31,10 @@ public class EncodeDecode extends BCryptPasswordEncoder {
 
 	@Override
 	public boolean matches(CharSequence raw, String encoded) {
+		System.out.println("RAW : " + raw + " ENCODED : " + encoded);
 		return encodeDecode.decrypt(encoded).equals(raw);
 		}
+	
 	public void setEncodeDecode(AES256TextEncryptor encodeDecode) {
 		this.encodeDecode = encodeDecode;
 		
