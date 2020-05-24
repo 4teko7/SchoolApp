@@ -42,10 +42,25 @@
                              <div class="file btn btn-lg btn-primary">
                                 Change Photo
                                 <input id = "imgInput" type="file" name="file" />
-                                
+                                <input style = "display:none;" id = "idOfProfileImg" name="nameOfProfileImg" type="radio" />
                             </div>
                             
                         </div>
+                        
+                         <div class="profile-work">
+                            <p>WORK LINK</p>
+                            <a href="">Website Link</a><br/>
+                            <a href="">Bootsnipp Profile</a><br/>
+                            <a href="">Bootply Profile</a>
+                            <p>SKILLS</p>
+                            <a href="">Web Designer</a><br/>
+                            <a href="">Web Developer</a><br/>
+                            <a href="">WordPress</a><br/>
+                            <a href="">WooCommerce</a><br/>
+                            <a href="">PHP, .Net</a><br/>
+                        </div>
+                        
+                        
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
@@ -64,26 +79,7 @@
                             </ul>
                         </div>
                     </div>
-                    
-                </div>
-                
-                <div class="row">
-                
-                    <div class="col-md-4">
-                    
-                        <div class="profile-work">
-                            <p>WORK LINK</p>
-                            <a href="">Website Link</a><br/>
-                            <a href="">Bootsnipp Profile</a><br/>
-                            <a href="">Bootply Profile</a>
-                            <p>SKILLS</p>
-                            <a href="">Web Designer</a><br/>
-                            <a href="">Web Developer</a><br/>
-                            <a href="">WordPress</a><br/>
-                            <a href="">WooCommerce</a><br/>
-                            <a href="">PHP, .Net</a><br/>
-                        </div>
-                    </div>
+
                     <div class="col-md-8">
                     			<table class = "container">
 									<c:if test="${error != null}">
@@ -171,27 +167,34 @@
                                         </div><br>
                                         
                                         
-                                        <div class = "row" style = "">
-                                        <div class = "col-md-12">
-                                        <c:if test="${user.lecturePhotoPath != null}">
-			                            	<img id = "dersProgramiImg" src="${user.lecturePhotoPath}" alt="Lecture Photo"/>
-			                            </c:if>
-			                            <c:if test="${user.lecturePhotoPath == null}">
-			                            	<img id = "dersProgramiImg" src="https://via.placeholder.com/700" alt="Lecture Photo"/>
-			                            </c:if>
-		                                 </div>
-                                        <div class="col-md-6 profile-img">
+                                        <div class = "row" >
+	                                        <div  class = "col-md-8">
+		                                        <c:if test="${user.lecturePhotoPath != null}">
+					                            	<img  style = "width:100%;height:100%;" id = "dersProgramiImg" src="${user.lecturePhotoPath}" alt="Lecture Photo"/>
+					                            </c:if>
+					                            <c:if test="${user.lecturePhotoPath == null}">
+					                            	<img id = "dersProgramiImg" src="https://via.placeholder.com/700" alt="Lecture Photo"/>
+					                            </c:if>
+			                                 </div>
+			                                 
+			                                
+                                        </div>
+                                        <div class = "row">
+                                         <div class="col-md-6 profile-img">
                                         
                                         <div style = "margin-top:2rem;" class="file btn btn-lg btn-primary">
 			                                Ders Programi
 			                                <input  id = "imgDersProgramiInput" type="file" name="file" /><br>
-			                                
+			                                <input style = "display:none;" id = "idOfDersProgrami" name="imgDersProgramiRadio" type="radio" />
 			                            
 			                            </div>
                             
                                         	
                                         </div>
-                                        </div><br>
+                                        </div>
+                                        <br>
+                                        
+
                                    
 			                            
                             </div>
@@ -269,11 +272,13 @@ function showImage(imgInput,target) {
 	  imgInput.addEventListener("change",function() {
 	    // fill fr with image data    
 	    fr.readAsDataURL(imgInput.files[0]);
+	    radiobtnofProfileImage.checked = true;
 	  });
 	}
 
 	var src = document.getElementById("imgInput");
 	var target = document.getElementById("profilImg");
+	radiobtnofProfileImage = document.getElementById("idOfProfileImg");
 	
 	showImage(src,target); 
 	 
@@ -286,9 +291,12 @@ function showImage(imgInput,target) {
 		  imgInput.addEventListener("change",function() {
 		    // fill fr with image data    
 		    fr.readAsDataURL(imgInput.files[0]);
+		    radiobtnofDersProgrami.checked = true;
 		  });
 		}
 
+		radiobtnofDersProgrami = document.getElementById("idOfDersProgrami");
+		
 		var srcForDersProgrami = document.getElementById("imgDersProgramiInput");
 		var targetForDersProgrami = document.getElementById("dersProgramiImg");
 

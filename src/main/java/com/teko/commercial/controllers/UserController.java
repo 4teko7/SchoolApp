@@ -148,6 +148,7 @@ public class UserController {
 	
 	@PostMapping("/updateprofile")
 	public String updateUserProfilePost(@ModelAttribute("user") User user, @RequestParam("file") MultipartFile[] files,@RequestParam("id") int theId,  Model theModel,Authentication authentication,HttpServletRequest request) {
+
 		if(authentication != null && authentication.isAuthenticated()) {
 			User thisUser = userService.findById(user.getId());
 			String errors = validator.validateForProfileUpdate(user);
@@ -159,16 +160,21 @@ public class UserController {
 				thisUser.setPhotoPath(null); user.setPhotoPath(null);
 				}
 			else {
-				if(files.length > 0)
-					userService.uploadUserImage(thisUser, files[0]);
-			}
-			if(files.length > 1)
-				userService.uploadUserLectureImage(thisUser, files[1]);
-			
-			
-			if (!errors.equals("")) {
 				
-				userService.updateUser(thisUser, user);
+				if(request.getParameter("imgDersProgramiRadio") != null && request.getParameter("nameOfProfileImg") != null) {
+					userService.uploadUserImage(thisUser, files[0]);
+					
+					userService.uploadUserLectureImage(thisUser, files[1]);
+				}else if(request.getParameter("nameOfProfileImg") != null) {
+					userService.uploadUserImage(thisUser, files[0]);
+				}else if(request.getParameter("imgDersProgramiRadio") != null) {
+					userService.uploadUserLectureImage(thisUser, files[1]);
+				}
+			}
+			
+			
+			userService.updateUser(thisUser, user);
+			if (!errors.equals("")) {
 				theModel.addAttribute("user",thisUser);
 				theModel.addAttribute("error",errors);
 	            return "updateprofile";

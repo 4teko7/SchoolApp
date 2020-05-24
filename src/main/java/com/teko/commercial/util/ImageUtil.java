@@ -35,7 +35,7 @@ public class ImageUtil {
         if(folder == "uploads")
         	uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/uploads";
         
-        String outPath = uploadDir + "/teko-resized-"+height + "x" + width +"-" + time + ".png";
+        String outPath = uploadDir + "/" + thisUser.getUsername()+"-resized-"+height + "x" + width +"-" + time + ".png";;
         File output = new File(outPath);
         
 		ImageIO.write(resized, "png", output);
