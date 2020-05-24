@@ -41,6 +41,7 @@
 
 			    	<tr>    
 			    		<td><img src="/${user.photoPath}" alt="Profil Photo" style="width:10rem; height:10rem;"/></td>
+			             <td>${user.active}</td>
 			             <td>${user.id}</td>  
 			         	 <td>${user.firstname}</td>
 			         	 <td>${user.lastname}</td>  

@@ -14,7 +14,7 @@
       <div class="contents">
         <img src="https://gravatar.com/avatar/cd62d88a83461e0b1daa8f2fa31c4dcb?s=512&d=https://codepen.io/assets/avatars/user-avatar-512x512-6e240cf350d2f1cc07c2bed234c3a3bb5f1b237023c204c782622e80d6b212ba.png" alt="UserAvatar">
       
-      <p class="profile-name">Merhaba, <%= request.getRemoteUser() %></p>
+      <p class="profile-name">Merhaba,<%if (request.getRemoteUser() != null) {%> <%= request.getRemoteUser() %><%}else{ %> Yolcu<% } %></p>
         <p class="profile-description">Seni Aramızda gördüğümüze Sevindik.</p>
         <div class="buttons">
           <ul>
