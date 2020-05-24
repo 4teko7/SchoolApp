@@ -122,6 +122,22 @@
 	    <version>${spring-security.version}</version>
 	</dependency>
 	
+	<!-- For Heroku Database -->
+	
+	<dependency>
+	<groupId>org.postgresql</groupId>
+	<artifactId>postgresql</artifactId>
+	<scope>runtime</scope>
+	</dependency>
+	
+	
+	<!-- END OF  For Heroku Database -->
+		
+	
+	
+	
+	
+	
 	</dependencies>
 
 	<build>
