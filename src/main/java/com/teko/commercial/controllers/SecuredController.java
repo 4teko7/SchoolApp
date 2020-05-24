@@ -1,6 +1,7 @@
 package com.teko.commercial.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -122,15 +123,32 @@ public class SecuredController {
 		
 		
 		if(authentication != null && authentication.isAuthenticated()) {
+			
+			
 			User thisUser = userService.findById(user.getId());
 			String errors = validator.validateForProfileUpdate(user);
+			
 			if (!errors.equals("")) {
 				userService.updateUser(thisUser, user);
 				theModel.addAttribute("user",thisUser);
 				theModel.addAttribute("error",errors);
 	            return "updateUser";
 	        }else {
-			
+	        	if(request.getParameter("makeAdmin") != null) {
+	    			Role role = new Role();
+	    			role.setid(1);
+	    			role.setRole("ADMIN");
+	    			List<Role> lst = new ArrayList<Role>();
+	    			lst.add(role);
+	    			user.setRoles(lst);
+	    		}else if(request.getParameter("makeUser") != null) {
+	    			Role role = new Role();
+	    			role.setid(2);
+	    			role.setRole("USER");
+	    			List<Role> lst = new ArrayList<Role>();
+	    			lst.add(role);
+	    			user.setRoles(lst);
+	    		}
 				userService.updateUser(thisUser,user);
 				userService.save(thisUser);
 	        }

@@ -26,29 +26,6 @@
 
 <div style = "display: flex; justify-content: center;">
 
-<%-- <%if (request.getRemoteUser() == null) {%>
-	 <li>
-	   <a href="#"><i class="ti-user"></i><span> <button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/login' ">Upload Video</button></span></a>
-	 </li>
-<%}%> --%>
-           
-
-<%--
-	CHECKS AUTHENTICATIONS
-
-
- <sec:authorize access="isAnonymous()">
-    <form method="POST" action="<c:url value='j_spring_security_check'/>">
-        Username: <input name="j_username" type="text" value="${SPRING_SECURITY_LAST_USERNAME}" /> 
-        Password: <input name="j_password" type="password" /> 
-        <input type="submit" value="Sign in" />
-    </form>
-</sec:authorize>
-<sec:authorize access="isAuthenticated()">
-    <a href="<c:url value="/j_spring_security_logout" />">Logout</a>
-</sec:authorize> --%>
-
-
 
 
 

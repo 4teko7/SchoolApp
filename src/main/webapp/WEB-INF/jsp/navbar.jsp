@@ -22,6 +22,11 @@
           	<li>
               <a href="#"><i class="ti-panel"></i><span><button  class = "btn btn-info" style = "margin-left:5%; margin-right:90%; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/home' ">Home</button></span></a>
             </li>
+            
+            <li>
+              <a href="#"><i class="ti-panel"></i><span><button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/teachers' ">All Teachers</button></span></a>
+            </li>
+            
             <%if (request.getRemoteUser() != null) {%>
             <li>
               <a href="#"><i class="ti-panel"></i><span><button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/secured/users' ">Users</button></span></a>

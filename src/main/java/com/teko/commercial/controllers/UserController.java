@@ -10,11 +10,13 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +28,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.teko.commercial.Entities.User;
+import com.teko.commercial.Entities.UserRole;
+import com.teko.commercial.Entities.Video;
 import com.teko.commercial.encryption.EncodeDecode;
 import com.teko.commercial.repositories.UserRepository;
 import com.teko.commercial.services.UserDetailsServiceImp;
+import com.teko.commercial.services.UserRoleService;
 import com.teko.commercial.services.VideoService;
 import com.teko.commercial.util.ImageUtil;
 import com.teko.commercial.validator.UserValidator;
@@ -59,6 +64,9 @@ public class UserController {
 	@Autowired
 	private UserValidator validator;
 
+	@Autowired
+	private UserRoleService userRoleService;
+	
 	private EncodeDecode encodeDecode = new EncodeDecode();
 	
 	private ImageUtil imageUtil = new ImageUtil();
@@ -157,7 +165,30 @@ public class UserController {
 
 	}
 	
+	@GetMapping("/teachers")
+	public String getAllTeachers(Model theModel,HttpServletRequest request) {
+//		List<User> users = userService.findAll();
+		List<UserRole> userRoles = userRoleService.findByRoleId(1);
+		List<User> users = userRoleService.getAllUsersFromList(userRoles);
+		
+		theModel.addAttribute("users",users);
+		
+		return "allteachers";
 
+	}
+	
+	@RequestMapping(value="teachervideo", method = RequestMethod.GET)
+	public String teacherVideos(@RequestParam("id") int theId, Model theModel,HttpServletRequest request) {
+		
+		User thisUser = userService.findById(theId);
+		List<Video> videos = videoService.findByUser(thisUser);
+		theModel.addAttribute("videos",videos);
+		
+		return "teachervideos";
+	}
+	
+	
+	
 	
 	
 }

@@ -13,7 +13,7 @@ import com.teko.commercial.Entities.UserRole;
 public interface UserRoleRepository  extends JpaRepository <UserRole , Integer> {
 
 	UserRole findById(int id);
-	List<UserRole> findByuserId(int id);
+	List<UserRole> findByUserId(int id);
 	List<UserRole> findByRoleId(int id);
 
 }
