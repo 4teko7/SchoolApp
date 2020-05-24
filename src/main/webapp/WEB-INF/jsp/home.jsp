@@ -1,3 +1,4 @@
+<%@page import="com.teko.commercial.utils.CheckRoles"%>
 <jsp:include page="layout.jsp"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 
@@ -34,6 +35,8 @@
 
 </table>
 <div style="clear; both;"></div> 
+
+<%if (new CheckRoles().hasRole("ROLE ADMIN")) {%>
  <a href ="/secured/myvideos">
 <div class="col-md-4">
         <div class="videoUpload btn btn-lg btn-danger">
@@ -55,7 +58,7 @@
 </div>
 </a>
 
-
+<% } %>
 
 
 

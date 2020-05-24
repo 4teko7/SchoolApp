@@ -1,3 +1,4 @@
+<%@page import="com.teko.commercial.utils.CheckRoles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -27,7 +28,7 @@
               <a href="#"><i class="ti-panel"></i><span><button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/teachers' ">All Teachers</button></span></a>
             </li>
             
-            <%if (request.getRemoteUser() != null) {%>
+            <%if ((new CheckRoles().hasRole("ROLE ADMIN"))) {%>
             <li>
               <a href="#"><i class="ti-panel"></i><span><button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/secured/users' ">Users</button></span></a>
             </li>
