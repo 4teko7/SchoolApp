@@ -54,7 +54,7 @@
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Lectures</a>
                                 </li>
                             </ul>
                         </div>
@@ -151,6 +151,20 @@
                                         </div>
                             </div>
                             <div class="tab-pane " id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            
+                             		<div class = "row" style = "">
+	                                        <div class = "col-md-9">
+		                                        <c:if test="${user.lecturePhotoPath != null}">
+					                            	<img style = "width:100%;height:100%;" id = "dersProgramiImg" src="${user.lecturePhotoPath}" alt="Lecture Photo"/>
+					                            </c:if>
+					                            <c:if test="${user.lecturePhotoPath == null}">
+					                            	<img id = "dersProgramiImg" src="https://via.placeholder.com/700" alt="Lecture Photo"/>
+					                            </c:if>
+			                                 </div>
+
+                                        </div><br>
+                                        
+                                        
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>Experience</label>

@@ -48,9 +48,7 @@
 	<h3 style = "margin-left:2rem;">${video.name}</h3><hr>
 	<h3 style = "margin-left:1rem;color:red;display:inline;">Subject <h4 style = "margin-left:2rem;">${video.videoSubject}</h4></h3>
 	<h3  style = "margin-left:1rem;color:red;display:inline;">Content <h4 style = "margin-left:2rem;">${video.videoContent}</h4></h3>
-	<p>
-		
-	</p>
+	<br>
 	</div>
 </div>
 

@@ -168,10 +168,39 @@
                                             <div class="col-md-6">
                                                 <b style = "color:red;"><b><form:input id = "classNumber" placeholder = "Class" path = "classNumber"/></b></b>
                                             </div>
+                                        </div><br>
+                                        
+                                        
+                                        <div class = "row" style = "">
+                                        <div class = "col-md-12">
+                                        <c:if test="${user.lecturePhotoPath != null}">
+			                            	<img id = "dersProgramiImg" src="${user.lecturePhotoPath}" alt="Lecture Photo"/>
+			                            </c:if>
+			                            <c:if test="${user.lecturePhotoPath == null}">
+			                            	<img id = "dersProgramiImg" src="https://via.placeholder.com/700" alt="Lecture Photo"/>
+			                            </c:if>
+		                                 </div>
+                                        <div class="col-md-6 profile-img">
+                                        
+                                        <div style = "margin-top:2rem;" class="file btn btn-lg btn-primary">
+			                                Ders Programi
+			                                <input  id = "imgDersProgramiInput" type="file" name="file" /><br>
+			                                
+			                            
+			                            </div>
+                            
+                                        	
                                         </div>
+                                        </div><br>
+                                   
+			                            
                             </div>
                             <div class="tab-pane " id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                         <div class="row">
+                                        
+
+                    
+                    
                                             <div class="col-md-6">
                                                 <label>Experience</label>
                                             </div>
@@ -237,17 +266,36 @@ function showImage(imgInput,target) {
 	  var fr=new FileReader();
 	  // when image is loaded, set the src of the image where you want to display it
 	  fr.onload = function(e) { target.src = this.result; };
-	  src.addEventListener("change",function() {
+	  imgInput.addEventListener("change",function() {
 	    // fill fr with image data    
-	    fr.readAsDataURL(src.files[0]);
+	    fr.readAsDataURL(imgInput.files[0]);
 	  });
 	}
 
 	var src = document.getElementById("imgInput");
 	var target = document.getElementById("profilImg");
+	
+	showImage(src,target); 
+	 
 
 
-	showImage(src,target);  
+	function showImageDersProgrami(imgInput,target) {
+		  var fr=new FileReader();
+		  // when image is loaded, set the src of the image where you want to display it
+		  fr.onload = function(e) { target.src = this.result; };
+		  imgInput.addEventListener("change",function() {
+		    // fill fr with image data    
+		    fr.readAsDataURL(imgInput.files[0]);
+		  });
+		}
+
+		var srcForDersProgrami = document.getElementById("imgDersProgramiInput");
+		var targetForDersProgrami = document.getElementById("dersProgramiImg");
+
+		
+		showImageDersProgrami(srcForDersProgrami,targetForDersProgrami);  
+
+		
   
 
 </script>

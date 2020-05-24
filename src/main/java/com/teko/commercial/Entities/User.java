@@ -76,16 +76,10 @@ public class User {
 	@OneToMany(mappedBy="user", fetch = FetchType.LAZY)    
 	private List<Video> videos;
 	
+	@Column(name="lecturePath")
+	private String lecturePhotoPath;
 	
 	
-	
-
-
-
-
-
-
-
 	
 
 	public List<Video> getVideos() {
@@ -293,6 +287,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getLecturePhotoPath() {
+		return lecturePhotoPath;
+	}
+
+	public void setLecturePhotoPath(String lecturePhotoPath) {
+		this.lecturePhotoPath = lecturePhotoPath;
 	}
 
 

@@ -31,7 +31,8 @@ import com.teko.commercial.util.ImageUtil;
 
 @Service
 public class UserDetailsServiceImp implements UserDetailsService {
-
+	final String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static";
+	
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -109,27 +110,45 @@ public class UserDetailsServiceImp implements UserDetailsService {
 	}
 	
 	
-	public void uploadUserImage(User thisUser,MultipartFile file) {
+	
+	public String uploadImage(User thisUser,MultipartFile file,String folder) {
+		String path = "";
 		try {
-			final String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static";
+			
 			if(!file.isEmpty()) {
 	//			System.out.println(path.toAbsolutePath().toString());
 				String time = System.currentTimeMillis() + "";
 				Path fileNameAndPath = Paths.get(uploadDir+"/uploads",file.getOriginalFilename().substring(0,file.getOriginalFilename().length()-4) +"-"+ thisUser.getUsername() + "-"+time+".png");
 	//			String fileNameAndPath = path.toString() + "/" + file.getOriginalFilename();
 				Files.write(fileNameAndPath, file.getBytes());
-				String path = imageUtil.resize(thisUser,fileNameAndPath.toString(),300,300);
+				path = imageUtil.resize(thisUser,fileNameAndPath.toString(),300,300,folder);
 				
 				fileUtils.removeFileFromStorage(fileNameAndPath.toString());
-				if(thisUser.getPhotoPath() != null)
-					fileUtils.removeFileFromStorage(uploadDir+"/"+thisUser.getPhotoPath());
 				
-				thisUser.setPhotoPath(path);
+				
+//				thisUser.setPhotoPath(path);
 				
 			}
 		}catch(Exception e) {
 			System.out.println(e.getStackTrace());
 		}
+		System.out.println("FROM UploadImage METHOD : " + path + " Is OUR RETURNED PATH");
+		return path;
+		
+	}
+	
+	
+	public void uploadUserImage(User thisUser,MultipartFile file) {
+		if(thisUser.getPhotoPath() != null)
+			fileUtils.removeFileFromStorage(uploadDir+"/"+thisUser.getPhotoPath());
+		thisUser.setPhotoPath("uploads/"+uploadImage(thisUser,file,"uploads"));
+	}
+	
+	public void uploadUserLectureImage(User thisUser, MultipartFile file) {
+		if(thisUser.getLecturePhotoPath() != null)
+			fileUtils.removeFileFromStorage(uploadDir+"/"+thisUser.getLecturePhotoPath());
+		thisUser.setLecturePhotoPath("uploads/lectures/"+uploadImage(thisUser,file,"lectures"));
+		
 	}
 	
 	
@@ -158,4 +177,6 @@ public class UserDetailsServiceImp implements UserDetailsService {
 		}
 		return new Video();
 	}
+
+
 }

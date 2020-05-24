@@ -16,7 +16,7 @@ public class ImageUtil {
 
 	private FileUtils fileUtils = new FileUtils();
 	
-    public String resize(User thisUser, String imagePath, int height, int width) {
+    public String resize(User thisUser, String imagePath, int height, int width,String folder) {
     	String time = System.currentTimeMillis() + "";
     	String uploadDir = "";
     	try {
@@ -30,19 +30,23 @@ public class ImageUtil {
         g2d.drawImage(tmp, 0, 0, null);
         g2d.dispose();
         
-        uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/uploads";
+        if(folder == "lectures")
+        	uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/uploads/lectures";
+        if(folder == "uploads")
+        	uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/uploads";
         
         String outPath = uploadDir + "/teko-resized-"+height + "x" + width +"-" + time + ".png";
         File output = new File(outPath);
         
 		ImageIO.write(resized, "png", output);
+		
+		System.out.println("FROM RESIZE METHOD : " + outPath + " WAS WRITTEN");
 
-		return "uploads/teko-resized-"+height + "x" + width +"-" + time + ".png";
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	return "uploads/"+ thisUser.getUsername()+"-resized-"+height + "x" + width +"-" + time + ".png";
+    	return thisUser.getUsername()+"-resized-"+height + "x" + width +"-" + time + ".png";
         
         
     }
