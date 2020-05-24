@@ -34,6 +34,7 @@ import com.teko.commercial.encryption.EncodeDecode;
 import com.teko.commercial.repositories.RoleRepository;
 import com.teko.commercial.services.UserDetailsServiceImp;
 import com.teko.commercial.services.VideoService;
+import com.teko.commercial.util.FileUtils;
 import com.teko.commercial.utils.CheckRoles;
 import com.teko.commercial.validator.UserValidator;
 
@@ -55,7 +56,8 @@ public class SecuredController {
 	private UserValidator validator;
 	
 	private EncodeDecode encodeDecode = new EncodeDecode();
-//	private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	
+	private FileUtils fileUtils = new FileUtils();
 	
 	CheckRoles checkRoles = new CheckRoles();
 
@@ -229,20 +231,13 @@ public class SecuredController {
 		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
 		Video thisVideo = videoService.findById(video.getId());	
 		if(request.getParameter("removeVideo") != null) {
-			try{
-	            File file = new File(uploadDir + "/" + thisVideo.getPath());
-	            System.out.println(uploadDir + "/" + thisVideo.getPath());
-	            if(file.delete()){
-	                System.out.println(file.getName() + " is deleted!");
-	            }else{
-	                System.out.println("Delete operation is failed.");
-	            }
-	        }catch(Exception e){
-	            System.out.println("ERROR : " + e.getStackTrace());
-	        }finally{
-	        	videoService.deleteById(video.getId());
-	        	System.out.println("Video Deleted From Database !");
-	        }
+			
+			
+			fileUtils.removeFileFromStorage(uploadDir + "/" + thisVideo.getPath());
+			
+        	videoService.deleteById(video.getId());
+        	System.out.println("Video Deleted From Database !");
+	        
 		}else {
 			
 			videoService.updateVideo(thisVideo, video);

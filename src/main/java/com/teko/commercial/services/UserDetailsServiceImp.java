@@ -26,6 +26,7 @@ import com.teko.commercial.encryption.EncodeDecode;
 import com.teko.commercial.repositories.RoleRepository;
 import com.teko.commercial.repositories.UserRepository;
 import com.teko.commercial.repositories.UserRoleRepository;
+import com.teko.commercial.util.FileUtils;
 import com.teko.commercial.util.ImageUtil;
 
 @Service
@@ -48,6 +49,8 @@ public class UserDetailsServiceImp implements UserDetailsService {
 	private UserRoleService userRoleService;
 	
 	private ImageUtil imageUtil = new ImageUtil();
+	
+	private FileUtils fileUtils = new FileUtils();
 	
 //	private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
@@ -112,29 +115,16 @@ public class UserDetailsServiceImp implements UserDetailsService {
 			if(!file.isEmpty()) {
 	//			System.out.println(path.toAbsolutePath().toString());
 				String time = System.currentTimeMillis() + "";
-				Path fileNameAndPath = Paths.get(uploadDir+"/uploads"+file.getOriginalFilename().substring(0,file.getOriginalFilename().length()-4) +"-"+ thisUser.getUsername() + "-"+time+".png");
+				Path fileNameAndPath = Paths.get(uploadDir+"/uploads",file.getOriginalFilename().substring(0,file.getOriginalFilename().length()-4) +"-"+ thisUser.getUsername() + "-"+time+".png");
 	//			String fileNameAndPath = path.toString() + "/" + file.getOriginalFilename();
 				Files.write(fileNameAndPath, file.getBytes());
 				String path = imageUtil.resize(thisUser,fileNameAndPath.toString(),300,300);
 				
-				
-				try{
-					File input = new File(uploadDir+"/"+thisUser.getPhotoPath());
-		            if(input.delete()){
-		                System.out.println(input.getName() + " is deleted!");
-		            }else{
-		                System.out.println("Delete operation is failed.");
-		            }
-		        }catch(Exception e){
-		            System.out.println("ERROR : " + e.getStackTrace());
-		        }
-				
+				fileUtils.removeFileFromStorage(fileNameAndPath.toString());
+				if(thisUser.getPhotoPath() != null)
+					fileUtils.removeFileFromStorage(uploadDir+"/"+thisUser.getPhotoPath());
 				
 				thisUser.setPhotoPath(path);
-				
-				
-				
-				
 				
 			}
 		}catch(Exception e) {

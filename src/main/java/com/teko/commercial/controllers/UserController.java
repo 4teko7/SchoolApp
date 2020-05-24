@@ -37,6 +37,7 @@ import com.teko.commercial.repositories.UserRepository;
 import com.teko.commercial.services.UserDetailsServiceImp;
 import com.teko.commercial.services.UserRoleService;
 import com.teko.commercial.services.VideoService;
+import com.teko.commercial.util.FileUtils;
 import com.teko.commercial.util.ImageUtil;
 import com.teko.commercial.validator.UserValidator;
 
@@ -68,6 +69,7 @@ public class UserController {
 	
 	private ImageUtil imageUtil = new ImageUtil();
 	
+	private FileUtils fileUtils = new FileUtils();
 	
 	@GetMapping("/registration")
 	public String registerUser(Model theModel) {
@@ -150,16 +152,9 @@ public class UserController {
 			User thisUser = userService.findById(user.getId());
 			String errors = validator.validateForProfileUpdate(user);
 			if(request.getParameter("removePhoto") != null) {
-				try{
-					File input = new File(uploadDir+"/"+thisUser.getPhotoPath());
-		            if(input.delete()){
-		                System.out.println(input.getName() + " is deleted!");
-		            }else{
-		                System.out.println("Delete operation is failed.");
-		            }
-		        }catch(Exception e){
-		            System.out.println("ERROR : " + e.getStackTrace());
-		        }
+				
+				fileUtils.removeFileFromStorage(uploadDir+"/"+thisUser.getPhotoPath());
+				
 				thisUser.setPhotoPath(null); user.setPhotoPath(null);
 				}
 			else userService.uploadUserImage(thisUser, file);
