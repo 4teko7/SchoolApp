@@ -29,7 +29,7 @@
 
 <div style="clear; both;"></div> 
 <c:if test="${!videos.isEmpty()}">
-<div class="wrapper">
+<div class="">
 <h2><strong>${videos.get(0).user.firstname} ${videos.get(0).user.lastname }</strong></h2>
 <div class="cards">
 <c:forEach items="${videos}" var="video">
@@ -43,14 +43,15 @@
 
 </div>
 
-<div id = "contentOfVideo" class = "card">
+<div id = "contentOfVideo" class = "parentOfContentOfVideo card">
+<div class = "childOfContentOfVideo">
 	<h3 style = "margin-left:2rem;">${video.name}</h3><hr>
 	<h3 style = "margin-left:1rem;color:red;display:inline;">Subject <h4 style = "margin-left:2rem;">${video.videoSubject}</h4></h3>
-	<h3 style = "margin-left:1rem;color:red;display:inline;">Content <h4 style = "margin-left:2rem;">${video.videoContent}</h4></h3>
+	<h3  style = "margin-left:1rem;color:red;display:inline;">Content <h4 style = "margin-left:2rem;">${video.videoContent}</h4></h3>
 	<p>
 		
 	</p>
-	
+	</div>
 </div>
 
 </div>
