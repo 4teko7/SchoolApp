@@ -24,4 +24,24 @@ public class VideoService {
 	public List<Video> findByExtension(String extension){return videoRepo.findByExtension(extension);}
 	
 	public List<Video> findByName(String name){return videoRepo.findByName(name);}
+	
+	public void deleteById(int id) { videoRepo.deleteById(id);}
+	
+	
+	public void updateVideo(Video original, Video created) {
+		if(created.getMimeType() != null)
+			original.setMimeType(created.getMimeType());
+		if(created.getName() != null)
+			original.setName(created.getName());
+		if(created.getPath() != null)
+			original.setPath(created.getPath());
+		if(created.getUser() != null)
+			original.setUser(created.getUser());
+		if(created.getVideoContent() != null)
+			original.setVideoContent(created.getVideoContent());
+		if(created.getVideoSubject() != null)
+			original.setVideoSubject(created.getVideoSubject());
+	}
+	
+	
 }

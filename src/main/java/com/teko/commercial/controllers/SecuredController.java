@@ -1,5 +1,6 @@
 package com.teko.commercial.controllers;
 
+import java.io.File;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,7 +40,8 @@ import com.teko.commercial.validator.UserValidator;
 @RequestMapping("/secured")
 @Controller
 public class SecuredController {
-
+	final String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static";
+	
 	@Autowired
 	private UserDetailsServiceImp userService;
 	
@@ -111,7 +113,6 @@ public class SecuredController {
 	public String updateUserGet(@RequestParam("id") int theId,Model theModel) {
 		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
 		User user = userService.findById(theId);
-//		user.setRoles(roles);
 		user.setPassword(encodeDecode.decode(user.getPassword()));
 		user.setPasswordConfirm(encodeDecode.decode(user.getPasswordConfirm()));
 		theModel.addAttribute("user",user);
@@ -171,7 +172,7 @@ public class SecuredController {
 		List<Video> videos = videoService.findByUser(thisUser);
 		System.out.println("VIDEOS : " + videos);
 		theModel.addAttribute("videos",videos);
-		
+		theModel.addAttribute("video",new Video());
 		
 		return "myvideos";
 	}
@@ -214,8 +215,41 @@ public class SecuredController {
 		return "uploadvideo";
 	}
 	
+	@RequestMapping(value="updatevideo", method = RequestMethod.GET)
+	public String updateVideoGet(@RequestParam("id") int theId, Model theModel) {
+		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
+		
+		Video video = videoService.findById(theId);
+		theModel.addAttribute("video",video);
+		return "updatevideo";
+	}
 	
-	
+	@RequestMapping(value="updatevideo", method = RequestMethod.POST)
+	public String updateVideoPost(HttpServletRequest request, @ModelAttribute("video") Video video) {
+		if(!checkRoles.hasRole("ROLE ADMIN")) return "home";
+		Video thisVideo = videoService.findById(video.getId());	
+		if(request.getParameter("removeVideo") != null) {
+			try{
+	            File file = new File(uploadDir + "/" + thisVideo.getPath());
+	            System.out.println(uploadDir + "/" + thisVideo.getPath());
+	            if(file.delete()){
+	                System.out.println(file.getName() + " is deleted!");
+	            }else{
+	                System.out.println("Delete operation is failed.");
+	            }
+	        }catch(Exception e){
+	            System.out.println("ERROR : " + e.getStackTrace());
+	        }finally{
+	        	videoService.deleteById(video.getId());
+	        	System.out.println("Video Deleted From Database !");
+	        }
+		}else {
+			
+			videoService.updateVideo(thisVideo, video);
+			videoService.save(thisVideo);
+		}
+		return "redirect:/secured/myvideos";
+	}
 	
 	
 }
