@@ -5,10 +5,90 @@
     pageEncoding="UTF-8"%>
 
 
-<link href="../../resources/css/navbar.css" rel="stylesheet" id="bootstrap-css">
+<link href="${contextPath}/resources/css/navbar.css" rel="stylesheet" id="bootstrap-css">
 
 <% request.getClass(); %>
-  <div class="row">
+
+
+<body>
+<nav class="nav">
+        <div class="container">
+            <div class="logo">
+                <a href="#">Your Logo</a>
+            </div>
+            <div id="mainListDiv" class="main_list">
+                <ul class="navlinks">
+          	<li>
+              <a href="${pageContext.request.contextPath}/home"><i class="ti-panel">Home</i></a>
+            </li>
+            
+            <li>
+              <a href="${pageContext.request.contextPath}/teachers"><i class="ti-panel">All Teachers</i></a>
+            </li>
+            
+            <%if ((new CheckRoles().hasRole("ROLE ADMIN"))) {%>
+            <li>
+              <a href="${pageContext.request.contextPath}/secured/users"><i class="ti-panel">Users</i></a>
+            </li>
+            <%}%>
+            
+            <%if (request.getRemoteUser() == null) {%>
+            <li>
+              <a href="${pageContext.request.contextPath}/login"><i class="ti-user">Login</i></a>
+            </li>
+            <%}%>
+            
+            <%if (request.getRemoteUser() == null) {%>
+            <li>
+              <a href="${pageContext.request.contextPath}/registration"><i class="ti-power-off">Register</i></a>
+            </li>
+            <%}%>
+            
+            <%if (request.getRemoteUser() != null) {%>
+            <li>
+              <a href="${pageContext.request.contextPath}/profile"><i class="ti-power-off">My Profile</i></a>
+            </li>
+            <%}%>
+            
+            <%if (request.getRemoteUser() != null) {%>
+            <li>
+              <a href="${pageContext.request.contextPath}/logout"><i class="ti-power-off">Logout</i></a>
+            </li>
+            <%}%>
+          </ul>
+            </div>
+            <span class="navTrigger">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+        </div>
+    </nav>
+
+   
+
+<!-- Jquery needed -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/scripts.js" type="text/javascript"></script>
+    <script src="${contextPath}/resources/js/navbar.js" type="text/javascript"></script>
+
+<!-- Function used to shrink nav bar removing paddings and adding black background -->
+    <script>
+        $(window).scroll(function() {
+            if ($(document).scrollTop() > 50) {
+                $('.nav').addClass('affix');
+                console.log("OK");
+            } else {
+                $('.nav').removeClass('affix');
+            }
+        });
+    </script>
+    
+    
+    
+    
+ <%--  <div class="row">
   <div class="">
     <div class="profile-bar">
       <div class="contents">
@@ -65,7 +145,7 @@
     </div>
   </div>
 </div>
-
+ --%>
 
 <%-- <button style = "margin-left:3rem; color:green"  class = "btn btn-info" onclick="window.location.href = '${pageContext.request.contextPath}/secured/adduser'">Add User</button> --%>
 

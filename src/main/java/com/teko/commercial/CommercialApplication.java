@@ -1,5 +1,7 @@
 package com.teko.commercial;
 
+import java.io.File;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +16,13 @@ public class CommercialApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CommercialApplication.class, args);
+		createDirs();
 	}
 
+	public static void createDirs() {
+		String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/uploads/lectures";
+		(new File(uploadDir)).mkdirs();
+		uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/uploads/videos";
+		(new File(uploadDir)).mkdirs();
+	}
 }
