@@ -11,7 +11,7 @@
 
 
 <body>
-<nav class="nav">
+<nav class="navInsideNavbarjs">
         <div class="container">
             <div class="logo">
                 <a href="#">Your Logo</a>
@@ -77,10 +77,10 @@
     <script>
         $(window).scroll(function() {
             if ($(document).scrollTop() > 50) {
-                $('.nav').addClass('affix');
+                $('.navInsideNavbarjs').addClass('affix');
                 console.log("OK");
             } else {
-                $('.nav').removeClass('affix');
+                $('.navInsideNavbarjs').removeClass('affix');
             }
         });
     </script>
