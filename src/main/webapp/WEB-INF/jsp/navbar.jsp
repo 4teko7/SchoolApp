@@ -11,10 +11,10 @@
 
 
 <body>
-<nav class="navInsideNavbarjs">
-        <div class="container">
+<nav class="nav navInsideNavbarjs">
+        <div style = "margin-right:1.5rem; margin-left:1.5rem; margin-bottom:1.5rem;">
             <div class="logo">
-                <a href="#">Your Logo</a>
+                <a href="#"><img alt="" style = "width:6rem;" src="https://www.onlygfx.com/wp-content/uploads/2017/12/grunge-yes-no-icon-1-902x1024.png"></a>
             </div>
             <div id="mainListDiv" class="main_list">
                 <ul class="navlinks">
@@ -70,7 +70,7 @@
 <!-- Jquery needed -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="js/scripts.js" type="text/javascript"></script>
+
     <script src="${contextPath}/resources/js/navbar.js" type="text/javascript"></script>
 
 <!-- Function used to shrink nav bar removing paddings and adding black background -->
