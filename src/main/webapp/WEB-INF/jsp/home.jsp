@@ -58,6 +58,17 @@
 </div>
 </a>
 
+
+ <a href ="/chat">
+<div class="col-md-4">
+        <div class="videoUpload btn btn-lg btn-danger">
+            Join Chat
+            
+    </div>
+    
+</div>
+</a>
+
 <% } %>
 
 

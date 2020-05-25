@@ -103,18 +103,19 @@
 		<!-- END OF TEXT ENCRYPTION -->
 
 
-		<!-- For Video Content Solution  -->
-<!-- 		<dependency>
-		    <groupId>com.github.paulcwarren</groupId>
-		    <artifactId>spring-content-rest-boot-starter</artifactId>
-		    <version>0.0.10</version>
+	<!--  FOR WEBSOCKET CHAT APP-->
+	
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
 		<dependency>
-		    <groupId>com.github.paulcwarren</groupId>
-		    <artifactId>content-fs-spring-boot-starter</artifactId>
-		    <version>0.0.10</version>
-		</dependency> -->
-		<!--END OF For Video Content Solution  -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-reactor-netty</artifactId>
+		</dependency>
+		
+	<!-- END OF  FOR WEBSOCKET CHAT APP-->		
+
 
 	<dependency>
 	    <groupId>org.springframework.security</groupId>
