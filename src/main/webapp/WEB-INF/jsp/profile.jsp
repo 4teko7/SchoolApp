@@ -11,7 +11,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <link href="../../resources/css/userProfile.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -19,15 +18,15 @@
 
 
 </head>
-<body>
+<body >
 
 <!------ Include the above in your HEAD tag ---------->
 <%if (request.getRemoteUser() != null) {%>
-<div class="container emp-profile">
+<div class="container emp-profile" >
             <%-- <form method="post"> --%>
             <form:form action="/updateprofile" modelAttribute="user" method="GET">
             	<form:hidden path="id" />
-                <div class="row">
+                <div class="row" >
                     <div  class="col-md-4">
                         <div class="profile-img">
                            	   <c:if test="${user.photoPath != null}">
@@ -63,7 +62,7 @@
                         
                     </div>
                     <div class="col-md-6">
-                        <div class="profile-head">
+                        <div class="profile-head" >
                                     <h4 class="form-heading"><scan style = "font-size:3rem;"><b>${user.firstname} ${user.lastname}</b></scan></h4>
                                     <h3>
                                         ${user.username}

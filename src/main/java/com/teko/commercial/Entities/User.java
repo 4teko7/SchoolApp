@@ -73,7 +73,7 @@ public class User {
 	private List<Role> roles;
 
 	
-	@OneToMany(mappedBy="user", fetch = FetchType.LAZY)    
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="user", fetch = FetchType.LAZY)    
 	private List<Video> videos;
 	
 	@Column(name="lecturePath")

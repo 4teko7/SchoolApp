@@ -5,7 +5,7 @@
 
     <h1><span class="blue"><span class="yellow">USERS</pan></h1><hr>
 <body style = "margin-left:2rem; margin-right:2rem;">
-<div style = "overflow: auto;" >
+<div style = "overflow: auto; margin-bottom:2rem;" >
 <table style = "overflow: auto;"cellspacing="10" cellpadding="0" border="0" width="340" class="container">
 <div id = "allLinks" ><a href="${pageContext.request.contextPath}/registration"><p><span class="bg"></span><span class="base"></span><span class="text">Add User</span></p></a> 
 <%if (request.getRemoteUser() == null) {%><a class="white" href="${pageContext.request.contextPath}/login"><p><span class="bg"></span><span class="base"></span><span class="text">Login</span></p></a>  <%}%></div>
@@ -60,7 +60,7 @@
 			</tbody>
 </table>
 </div>
-</body>
+</body><br>
 <!-- <div style="clear; both;"></div>  -->
 					
 				

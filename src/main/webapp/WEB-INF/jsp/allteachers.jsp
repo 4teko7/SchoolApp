@@ -3,10 +3,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    <h1><span class="blue"><span class="yellow">USERS</pan></h1><hr>
-<body >
-<div style = "margin-left:2rem; margin-right:2rem;overflow: auto;" >
-<table class="container" style = "overflow:auto;">
+    <h1><span class="blue"><span class="yellow">Teachers</pan></h1><hr>
+<body style = "margin-left:2rem; margin-right:2rem;">
+<div style = "overflow: auto;" >
+<table style = "overflow: auto;"cellspacing="10" cellpadding="0" border="0" width="340" class="container">
 <div id = "allLinks" ><a href="${pageContext.request.contextPath}/registration"><p><span class="bg"></span><span class="base"></span><span class="text">Add User</span></p></a> 
 <%if (request.getRemoteUser() == null) {%><a class="white" href="${pageContext.request.contextPath}/login"><p><span class="bg"></span><span class="base"></span><span class="text">Login</span></p></a>  <%}%></div>
 	<thead>
@@ -42,5 +42,5 @@
 			</tbody>
 </table>
 </div>
-</body>
+</body><br><br>
 				
