@@ -4,10 +4,11 @@
     pageEncoding="UTF-8"%>
 
     <h1><span class="blue"><span class="yellow">USERS</pan></h1><hr>
-
-<table class="container" >
-<div style = "display: flex; justify-content: center;"><button style = "color:green"  class = "btn btn-info" onclick="window.location.href = '${pageContext.request.contextPath}/registration'">Add User</button>
-<%if (request.getRemoteUser() == null) {%><button  class = "btn btn-info" style = "margin-left:3rem; color:green" onclick="window.location.href =  '${pageContext.request.contextPath}/login' ">Login</button><%}%></div>
+<body style = "margin-left:2rem; margin-right:2rem;">
+<div style = "overflow: auto;" >
+<table style = "overflow: auto;"cellspacing="10" cellpadding="0" border="0" width="340" class="container">
+<div id = "allLinks" ><a href="${pageContext.request.contextPath}/registration"><p><span class="bg"></span><span class="base"></span><span class="text">Add User</span></p></a> 
+<%if (request.getRemoteUser() == null) {%><a class="white" href="${pageContext.request.contextPath}/login"><p><span class="bg"></span><span class="base"></span><span class="text">Login</span></p></a>  <%}%></div>
 	<thead>
 	
 		<tr>
@@ -58,7 +59,8 @@
 			</c:forEach>
 			</tbody>
 </table>
-
+</div>
+</body>
 <!-- <div style="clear; both;"></div>  -->
 					
 				

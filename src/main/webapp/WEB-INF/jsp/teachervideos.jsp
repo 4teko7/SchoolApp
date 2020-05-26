@@ -7,7 +7,7 @@
     
 <link href="../../resources/css/myvideos.css" rel="stylesheet" id="bootstrap-css">
     <h1><span class="blue"><span class="yellow">Teacher Videos</pan></h1><hr>
-    
+    <body style = "margin-left:2rem; margin-right:2rem;">
 <table class = "container">
 <c:if test="${message != null}">
     </div><div style = "" class="alert alert-success">
@@ -61,7 +61,7 @@
 </c:if>
 
 
-
+</body>
 
 
 

@@ -10,7 +10,6 @@
 <% request.getClass(); %>
 
 
-<body>
 <nav class="nav navInsideNavbarjs">
         <div style = "margin-right:1.5rem; margin-left:1.5rem; margin-bottom:1.5rem;">
             <div class="logo">
@@ -65,7 +64,6 @@
         </div>
     </nav>
 
-   
 
 <!-- Jquery needed -->
 

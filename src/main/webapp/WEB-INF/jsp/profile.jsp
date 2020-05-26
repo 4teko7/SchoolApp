@@ -224,7 +224,8 @@
 
               </div>
               		<div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                        <div id = "allLinks" ><a id = "editLink" href="#"><p><span class="bg"></span><span class="base"></span><span class="text">Edit Profile</span></p></a>
+                        <input id= "editProfileInput" type="submit" style = "display:none;" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
                     </div> 
                     </div>
             </form:form>           
@@ -233,7 +234,16 @@
 </body>
 
 <script type="text/javascript">
+/* 	var div = document.getElementById("allLinks");
+	var input = document.getElementById("editProfileInput");
 
+	div.onclick = function(){input.click();console.log("IT IS HERE2;")} */
+
+
+	$('#editLink').click(function(){
+		console.log("IT IS HERE;")
+	     	$("#editProfileInput").click();
+	});
 </script>
 
 </html>

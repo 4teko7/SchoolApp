@@ -36,42 +36,18 @@
 </table>
 <div style="clear; both;"></div> 
 
+
 <%if (new CheckRoles().hasRole("ROLE ADMIN")) {%>
- <a href ="/secured/myvideos">
-<div class="col-md-4">
-        <div class="videoUpload btn btn-lg btn-danger">
-            My Videos
-            
+
+<div id = "allLinks">
+	<a href="/secured/myvideos"><p><span class="bg"></span><span class="base"></span><span class="text">My Videos</span></p></a>
+    <a class="white" href="/secured/addvideopage"><p><span class="bg"></span><span class="base"></span><span class="text">Add Video</span></p></a>
+    <a class="transparent" href="/chat"><p><span class="bg"></span><span class="base"></span><span class="text">Join Chat</span></p></a>
     </div>
-    
-</div>
-</a>
 
 
- <a href ="/secured/addvideopage">
-<div class="col-md-4">
-        <div class="videoUpload btn btn-lg btn-danger">
-            Add Video
-            
-    </div>
-    
-</div>
-</a>
-
-
- <a href ="/chat">
-<div class="col-md-4">
-        <div class="videoUpload btn btn-lg btn-danger">
-            Join Chat
-            
-    </div>
-    
-</div>
-</a>
 
 <% } %>
 
-
-
-					
+	
 				
